@@ -9,6 +9,7 @@
 \usepackage{xcolor}
 \usepackage{enumitem}
 \usepackage{float}
+\usepackage{graphicx}
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta,calc,decorations.pathreplacing,shapes.misc}
 \usepackage[hidelinks]{hyperref}
@@ -50,6 +51,12 @@ comparação de BRKGAs}
 \noindent Este relatório registra uma \textbf{nova conversa} com o professor. A primeira está em
 \nolinkurl{docs/retorno_professor/retorno_professor.pdf}; os pontos daqui complementam aqueles.
 
+\quadro{verde}{Caminho escolhido.}{Vetor com três blocos de chaves por item: \textbf{ordem} (livre, decidida pela
+metaheurística), \textbf{para qual caixa} e \textbf{regra de posição}; $K_0=$ \textbf{LB completo} caixas abertas no
+início; quando o item não cabe na caixa escolhida, entra o \textbf{plano B da Figura~\ref{fig:planob}} (a mais cheia
+que serve; senão, uma caixa nova). A ordem \textbf{não} será fixada: a justificativa, com um exemplo dos dados, está na
+Seção~\ref{sec:ordem}.}
+
 % =====================================================================
 \section{O que o professor disse}
 % =====================================================================
@@ -68,13 +75,17 @@ comparação de BRKGAs}
 % =====================================================================
 \section{Caixas iniciais e ``para qual caixa''}
 % =====================================================================
-\subsection{Por que abrir caixas no começo ajuda o Best Fit}
-Hoje o decodificador abre caixas \textbf{sob demanda}: começa com uma, e só abre outra quando o item não cabe em
-nenhuma. Nos primeiros itens há pouquíssimas caixas abertas, então ``a primeira que serve'' (FF) e ``a mais cheia''
-(BF) quase sempre escolhem a mesma. \textbf{Isso pode explicar por que FF e BF empataram nos testes} (hipótese).
+\subsection{Quando abrir caixas no começo faz diferença}
+Um decodificador que abre caixas \textbf{sob demanda} começa com uma e só abre outra quando o item não cabe em
+nenhuma.
 
-Abrindo $K_0$ caixas vazias logo no início, cada item tem várias caixas para escolher desde o começo, e a escolha
-passa a fazer diferença.
+\textbf{Com as regras FF e BF, abrir $K_0$ caixas vazias no início não muda nada.} Uma caixa vazia só é usada quando
+nenhuma caixa ocupada serve: o FF passa primeiro pelas ocupadas, e o BF nunca escolhe a vazia (ela é sempre a menos
+cheia). O resultado é idêntico a abrir sob demanda.
+
+As $K_0$ caixas só fazem diferença quando a \textbf{chave escolhe a caixa diretamente} (o bloco 2, a seguir): aí a
+metaheurística pode mandar um item para uma caixa vazia mesmo que uma ocupada servisse. Por isso as caixas iniciais
+andam junto com o ``para qual caixa''; o Best Fit entra como plano B (Seção~\ref{sec:naocabe}).
 
 \subsection{Quantas caixas iniciais: $K_0$}
 A conta sugerida é a do limitante pela área:
@@ -98,7 +109,55 @@ Em só \textbf{12 das 64} instâncias $K_0$ é igual ao ótimo; em média fica 2
 grandes) 5,3 abaixo. Isso não impede o método (o decodificador abre caixas extras quando precisa, ver a
 Seção~\ref{sec:naocabe}), mas sugere uma alternativa:
 
-\quadro{azul}{Alternativa para $K_0$:}{usar o \textbf{LB completo}, $K_0=\max(\lceil\text{área}/WH\rceil,\ \text{maior
+\begin{center}
+\fcolorbox{cinza}{cinza!6}{\begin{minipage}{0.95\textwidth}\small
+\textbf{Lembrete: o que é LB, a conta pela área e a maior clique.}
+
+\smallskip
+O \textbf{LB} (\emph{lower bound}, limitante inferior) é um número de caixas que, com certeza, \textbf{não dá para usar
+menos}: um piso. O ótimo nunca fica abaixo dele. No projeto, ele sai de duas contas simples, e vale a maior:
+
+\begin{minipage}[t]{0.62\linewidth}
+\begin{enumerate}[leftmargin=*,itemsep=2pt,topsep=3pt]
+\item \textbf{Pela área} (é o $K_0$ acima): os itens precisam caber na área das caixas. Na instância 53, os itens somam
+  8234 de área e cada caixa $60\times60$ tem 3600: $8234/3600=2{,}29$, arredondando para cima, \textbf{pelo menos 3}.
+\item \textbf{Pela maior clique}: uma \emph{clique} é um grupo de itens em que \textbf{todos conflitam com todos}. Cada um
+  precisa de uma caixa diferente, então o grupo exige tantas caixas quantos itens tiver. Na 53, os itens 5, 7 e 23
+  conflitam entre si (figura ao lado): \textbf{pelo menos 3}.
+\end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.33\linewidth}\vspace{2pt}\centering
+\begin{tikzpicture}[it/.style={circle, draw=black!60, fill=azul!15, minimum size=7mm, font=\scriptsize}]
+  \node[it] (a) at (0,1.2) {5};
+  \node[it] (b) at (-1.0,0) {7};
+  \node[it] (c) at (1.0,0) {23};
+  \draw[thick, vermelho] (a) -- (b) -- (c) -- (a);
+  \node[font=\scriptsize, text=cinza, text width=3.6cm, align=center] at (0,-0.85)
+       {cada linha é um conflito: os 3 itens vão para 3 caixas diferentes};
+\end{tikzpicture}
+\end{minipage}
+
+\smallskip
+Contam como conflito também os pares que \textbf{não cabem juntos por tamanho}: se a soma das larguras passa de $W$
+\emph{e} a soma das alturas passa de $H$, os dois nunca dividem uma caixa. Por isso, nas instâncias com itens grandes
+(tipo III), aparecem cliques enormes. O \textbf{LB completo} é o maior dos dois valores:
+\[
+\text{LB} = \max\big(\,\lceil \text{área total}/WH \rceil,\ \text{tamanho da maior clique}\,\big).
+\]
+\begin{center}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+& pela área & maior clique & \textbf{LB completo} & ótimo \\ \midrule
+instância 53 (tipo I) & 3 & 3 & \textbf{3} & 4 \\
+instância 3 (tipo III) & 12 & 19 & \textbf{19} & 20 \\
+\bottomrule
+\end{tabular}
+\end{center}
+Na instância 3, a conta pela área sozinha diria ``pelo menos 12''; a clique de 19 itens mostra que são pelo menos 19.
+\end{minipage}}
+\end{center}
+
+\quadro{verde}{Escolha para $K_0$:}{o \textbf{LB completo}, $K_0=\max(\lceil\text{área}/WH\rceil,\ \text{maior
 clique})$, que já é calculado no projeto. No tipo III, onde a área erra mais, a maior clique domina (na instância 3, o
 LB é 19 para um ótimo de 20).}
 
@@ -119,17 +178,19 @@ Com $K_0$ calculado antes, o vetor fica com três blocos de $n$ chaves ($3n$ no 
   \draw[chaveta] (4.04,-0.45) -- (7.8,-0.45) node[midway, below=5pt, font=\scriptsize, align=center] {bloco 2: \textbf{para qual caixa}\\o item vai};
   \draw[chaveta] (8.44,-0.45) -- (12.2,-0.45) node[midway, below=5pt, font=\scriptsize, align=center] {bloco 3: \textbf{regra de posição}\\(BL ou BSSF)};
 \end{tikzpicture}
-\caption{Vetor proposto. Diferente do $3n$ da primeira conversa, o bloco 2 não escolhe entre FF e BF: escolhe
-\emph{diretamente a caixa}.}
+\caption{Vetor escolhido. Diferente do $3n$ da primeira conversa, o bloco 2 não escolhe entre FF e BF: escolhe
+\emph{diretamente a caixa}. Todas as chaves são de itens: cada item tem 3 (quando entra, para onde vai, como é
+posicionado).}
 \end{figure}
 
-\paragraph{Como a chave do bloco 2 vira uma caixa.} Com $K$ caixas abertas, a caixa do item é
+\paragraph{Como a chave do bloco 2 vira uma caixa.} A chave não é um sorteio a cada vez: é um número do vetor que a
+metaheurística ajusta durante a busca, e as mesmas chaves dão sempre as mesmas caixas. Com $K$ caixas abertas, a caixa do item é
 $\lfloor r\cdot K\rfloor+1$. Exemplo com $K_0=4$: chave $0{,}81 \Rightarrow \lfloor 0{,}81\times4\rfloor+1 = 4$
 (caixa 4); chave $0{,}07 \Rightarrow$ caixa 1; chave $0{,}44 \Rightarrow$ caixa 2.
 
 \subsection{E se o item não couber na caixa escolhida?}\label{sec:naocabe}
-É a decisão em aberto mais importante: a caixa sorteada pode ter um item em conflito, ou não ter espaço. Para
-manter \textbf{toda solução viável} (a vantagem atual do decodificador), o item precisa de um ``plano B'':
+A caixa escolhida pela chave pode ter um item em conflito com o novo, ou não ter espaço. Para
+manter \textbf{toda solução viável} (como em todo o projeto), o item precisa de um ``plano B'':
 
 \begin{figure}[H]
 \centering
@@ -146,21 +207,118 @@ manter \textbf{toda solução viável} (a vantagem atual do decodificador), o it
   \draw[seta] (d) -- node[rot]{sim} (e);
   \draw[seta] (d) -- node[rot, right]{não} (f);
 \end{tikzpicture}
-\caption{Proposta de ``plano B''. A solução continua sempre viável. No fim, caixas que ficaram vazias não contam.}
+\caption{Plano B (escolhido). A solução continua sempre viável. No fim, caixas que ficaram vazias não contam.}\label{fig:planob}
 \end{figure}
 
-\noindent Alternativas ao plano B: (a) tentar as caixas seguintes em ordem (FF); (b) aceitar soluções inviáveis e
-penalizar na nota. A (b) é a menos recomendada, porque faz a metaheurística gastar tempo com soluções que não servem.
-\textbf{Inclinação:} o fluxo da figura (BF como plano B, depois caixa nova).
+\noindent \textbf{Escolha inicial:} o fluxo da figura (BF como plano B, depois caixa nova). Mas o plano B tem um efeito
+colateral sobre a busca, discutido a seguir.
 
 \paragraph{Caixas vazias.} Como $K_0$ caixas são abertas no início, algumas podem terminar vazias, se nenhuma chave as
 escolher. Elas simplesmente não contam no número de caixas; a nota (caixas + desempate) continua a mesma.
 
+
+\subsection{O plano B confunde a metaheurística?}\label{sec:confunde}
+\textbf{Uma dúvida natural:} se a chave aponta uma caixa onde o item não cabe e o BF o coloca na melhor caixa, a
+metaheurística não vai ``aprender'' que é bom apontar para caixas onde o item não cabe?
+
+\textbf{Não.} O BRKGA não aprende regras: só compara notas e fica com os vetores de nota melhor. Se a chave do item 7
+aponta a caixa 3, onde ele não cabe, e o plano B o põe na caixa 1, o resultado é \textbf{idêntico} ao de uma chave que
+apontasse direto para a caixa 1. Mesma solução, mesma nota: a escolha errada \textbf{não é premiada} (não recebe nota
+melhor) \textbf{nem punida} (não recebe nota pior). Dá na mesma.
+
+\begin{center}\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Plano B & a escolha errada recebe & o que a busca aprende \\ \midrule
+BF & a \textbf{mesma} nota da certa & nada: dá na mesma \\
+caixa nova direto & nota \textbf{pior} (mais caixas) & a apontar para caixas onde o item cabe \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+O problema de verdade é que, quando o plano B entra, \textbf{a chave ``mente''}: diz uma caixa e o item vai para outra.
+Isso atrapalha a busca de dois jeitos. Exemplo: há 4 caixas abertas e, com os itens que já estão nelas, o item 7 só cabe na caixa 1. Com $K=4$, a chave
+do item 7 aponta a caixa assim:
+
+\begin{center}\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+chave do item 7 & $[0;\ 0{,}25)$ & $[0{,}25;\ 0{,}5)$ & $[0{,}5;\ 0{,}75)$ & $[0{,}75;\ 1)$ \\
+caixa apontada & 1 & 2 & 3 & 4 \\
+cabe? & sim & não & não & não \\
+onde o item vai parar & \textbf{1} & \textbf{1} (plano B) & \textbf{1} (plano B) & \textbf{1} (plano B) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Problema 1: a busca gasta tempo com mudanças que não mudam nada.} Qualquer chave do item 7 dá o mesmo
+resultado. Se a metaheurística muda essa chave de 0,30 para 0,60 e depois para 0,90, o decodificador roda três vezes e
+devolve \textbf{a mesma solução} três vezes. São avaliações desperdiçadas: a busca acha que está explorando, mas está
+parada.
+
+\paragraph{Problema 2: o filho não herda o que o pai tinha de bom.} O BRKGA funciona copiando chaves dos pais bons
+para os filhos, esperando que \emph{a mesma chave leve à mesma decisão}. Com o plano B, isso pode falhar:
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item no \textbf{pai}, a chave do item 7 é 0,60 (caixa 3). A caixa 3 está ocupada pelo item 12, então o plano B põe o
+  item 7 na caixa 1, e o resultado é bom;
+\item o \textbf{filho} herda a mesma chave 0,60 do item 7, mas recebe outra chave para o item 12, que agora vai para a
+  caixa 2. A caixa 3 fica livre, e o item 7 \textbf{vai para a caixa 3}, não mais para a 1;
+\item a decisão boa do pai (item 7 na caixa 1) \textbf{não passou para o filho}, embora a chave do item 7 seja
+  idêntica. E, com o item 7 fora da caixa 1, a arrumação dos itens seguintes também pode mudar, em cascata.
+\end{itemize}
+Em resumo: a chave do item 7 não diz ``vou para a caixa 1''; diz ``vou para a 3, se couber''. O que ela faz depende do
+que os \emph{outros} itens fizeram antes. Isso já acontece um pouco em qualquer decodificador guloso, mas o plano B
+aumenta o efeito. A \textbf{reescrita da chave}, mais abaixo, ataca os dois problemas: depois da decodificação, a chave
+do item 7 no pai vira, por exemplo, 0,10 (caixa 1), e o filho herda ``caixa 1'' de verdade.
+
+\paragraph{Três opções de plano B.}
+\begin{center}\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{5.9cm}>{\raggedright\arraybackslash}p{6.1cm}@{}}
+\toprule
+Plano B & Vantagem & Desvantagem \\ \midrule
+\textbf{BF}: a caixa mais cheia que serve & encaixa bem; a solução fica boa mesmo com chaves ruins & a chave ``mente'';
+  muitas chaves dão o mesmo resultado \\ \addlinespace
+\textbf{Caixa seguinte}: tenta $k+1$, $k+2$, \dots\ (e volta à 1) & chaves parecidas levam a lugares parecidos & pode
+  encaixar pior que o BF \\ \addlinespace
+\textbf{Caixa nova direto}: se não cabe na caixa da chave, abre outra & escolher mal \textbf{custa} caixas, então a
+  seleção favorece chaves que apontam para caixas onde o item cabe; a chave nunca ``mente'' & no começo da busca quase
+  toda escolha é ruim (chaves aleatórias), e as soluções iniciais ficam com muitas caixas a mais; pune do mesmo jeito
+  um erro grosseiro e um item que não coube por pouco \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent A terceira opção, sem BF, foi levantada por esta pergunta: \emph{se não houvesse BF e o item fosse direto para
+uma caixa nova, a busca aprenderia que não é bom apontar para uma caixa onde ele não cabe, porque isso dá mais caixas.}
+É o dilema clássico entre \textbf{consertar} a escolha ruim e \textbf{deixar ela aparecer na nota}. Na literatura,
+consertar costuma funcionar melhor, mas depende do problema.
+
+\paragraph{Reescrever a chave (aprendizado lamarckiano).} Com o BF ou com a caixa seguinte, dá para tirar a ``mentira'':
+depois que o plano B coloca o item, o decodificador \textbf{corrige a chave dele no vetor} para apontar a caixa onde o item
+realmente foi. A próxima geração herda a escolha verdadeira. No RKO isso é possível sem alterar o código dele, porque o
+decodificador recebe o vetor por referência (\texttt{Decoder(TSol \&s, \dots)}) e pode mudar as chaves.
+\textbf{Conferido no BRKGA} (a metaheurística usada): ele chama o decodificador sobre os próprios indivíduos da população
+(\texttt{MH/BRKGA.h}, linhas 84, 191, 245 e 257), e a busca local Nelder-Mead copia o melhor vetor decodificado de volta
+para o indivíduo (\texttt{Method.h}, linha 481). Então as chaves corrigidas ficam guardadas e os filhos as herdam. Na
+implementação, falta testar o próprio decodificador: decodificar de novo um vetor já corrigido tem de dar exatamente a
+mesma solução.
+
+\paragraph{Medir.} Contar \textbf{com que frequência o plano B é usado}. Se for raro, a escolha do plano B quase não pesa;
+se for frequente, ela importa.
+
+\paragraph{Detalhe a definir.} Com $K$ crescendo a cada caixa nova, a regra $\lfloor r\cdot K\rfloor+1$ faz a mesma chave
+apontar para caixas diferentes ao longo da decodificação. É preciso definir se a chave escolhe entre as caixas abertas
+no momento ou entre um número fixo de caixas.
+
+\paragraph{Proposta.} Implementar o plano B como \textbf{parâmetro} (BF, caixa seguinte ou caixa nova direto), com a opção
+de reescrever a chave, contar o uso do plano B e comparar as variantes com o mesmo protocolo.
+
+
 % =====================================================================
-\section{Fixar a ordem de inserção}
+\section{Fixar a ordem de inserção? Decisão: manter a ordem livre}\label{sec:ordem}
 % =====================================================================
-Em vez de a metaheurística escolher a ordem dos itens (bloco 1), a ordem é \textbf{fixada por uma regra}, e o vetor
-fica só com os blocos 2 e 3 ($2n$ chaves):
+A ideia era a ordem dos itens ser \textbf{fixada por uma regra}, e o vetor ficar só com os blocos 2 e 3 ($2n$ chaves),
+tirando essa decisão da metaheurística:
 
 \begin{center}\small
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{5.6cm}>{\raggedright\arraybackslash}p{6.4cm}@{}}
@@ -176,9 +334,33 @@ corrigir \\
 \end{tabular}
 \end{center}
 
-\noindent Regras de ordem candidatas, todas já usadas no projeto: \textbf{área decrescente}, \textbf{grau de conflito
-decrescente} (a ordem ``Oc'' do artigo-base, usada no modelo exato) e \textbf{altura decrescente}. Itens grandes ou com
-muitos conflitos são os mais difíceis de encaixar, por isso tendem a ir primeiro.
+\noindent Regras de ordem que seriam candidatas: \textbf{área decrescente}, \textbf{grau de conflito decrescente} (a
+ordem ``Oc'' do artigo-base) e \textbf{altura decrescente}. A ideia é que itens grandes ou com muitos conflitos são os
+mais difíceis de encaixar e, por isso, iriam primeiro.
+
+\subsection{Por que não fixar: a ordem muda a arrumação dentro da caixa}
+O Bottom-Left põe cada item no lugar mais baixo e à esquerda \textbf{que estiver livre quando ele chega}. Quem entra
+primeiro pega os melhores cantos. Com a ordem fixa ``maiores primeiro'', o maior item sempre fica no canto, mesmo
+quando a única arrumação possível o deixa para o fim.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.86\textwidth]{../../resultados/figuras/exemplo_ordem_2kdc46.png}
+\caption{Instância 46, caixa 1 da solução ótima ($50\times50$): itens 22 ($27\times25$), 3 ($44\times15$), 4
+($12\times34$) e 6 ($1\times46$). Esquerda: na ordem ``maiores primeiro'', o 22 pega o canto, o 3 vai acima dele, e o
+item 4 não cabe mais. Direita: com o maior por último (3, 4, 6, 22), os quatro cabem.}
+\end{figure}
+
+\paragraph{Quanto isso acontece nos dados.} Nas soluções ótimas do método exato há 368 caixas com 2 ou mais itens.
+Em \textbf{28} delas ($\approx$8\%), a ordem ``maiores primeiro'' com Bottom-Left \textbf{não consegue} arrumar os
+itens da caixa; em 27 dessas, outra ordem consegue. Ressalvas: são as soluções ótimas que o exato encontrou (pode haver
+outras, com o mesmo número de caixas, que a ordem fixa alcança); e no caso restante, para caixas com muitos itens,
+foram testadas só 3000 ordens aleatórias, o que não prova que nenhuma funcione.
+
+\paragraph{Decisão.} \textbf{Manter a ordem livre} (bloco 1 no vetor). Com a ordem fixa, a metaheurística não
+consegue colocar um item grande por último; para escapar, teria de mandar algum item para outra caixa, o que pode custar
+uma caixa a mais. Com a ordem livre, ela pode descobrir sozinha casos como o da figura. O custo é um vetor maior (75
+chaves em vez de 50).
 
 \quadro{cinza}{A confirmar:}{na conversa apareceu ``ordem de inserção das caixas''. A leitura adotada aqui é a
 \textbf{ordem dos itens} (na literatura de empacotamento, os itens às vezes são chamados de ``caixas'' e os
@@ -210,34 +392,76 @@ versão e licença de cada uma.} Para a comparação ser justa, todas devem usar
 parada e as mesmas condições de execução (um núcleo por execução).
 
 % =====================================================================
-\section{Resumo: as representações em jogo}
+\section{Implementação e primeiros resultados}\label{sec:resultados}
+% =====================================================================
+\paragraph{O que foi implementado.} O decodificador escolhido está em \texttt{meta/src/Problem\_2BPPC.h} (função
+\texttt{DecodificaCaixa}) e é o padrão do programa \texttt{meta/rko\_bppc}. Ele segue exatamente este relatório:
+3 chaves por item (ordem, caixa, regra de posição BL/BSSF), $K_0=$ LB completo caixas abertas no início, plano B da
+Figura~\ref{fig:planob} e reescrita lamarckiana. As caixas iniciais que sobram vazias não contam. O plano B pode ser
+trocado por opção (\texttt{--planob bf|seguinte|nova}) e a reescrita pode ser desligada (\texttt{--lamarck 0}), para
+comparar. A metaheurística é o BRKGA do RKO, sem nenhuma alteração no código dele.
+
+\paragraph{Teste da reescrita.} Em 8 instâncias e nos três planos B, 2000 vetores aleatórios cada: decodificar de novo o
+vetor reescrito deu \textbf{exatamente a mesma solução em 48.000 de 48.000 casos}, e na segunda vez nenhum item precisou
+ir para outra caixa. Com chaves aleatórias (como no começo da busca), o plano B BF manda 30--43\% dos itens para outra
+caixa e 6--11\% para uma caixa nova; o plano B ``caixa nova direto'' abre caixa nova para 22--42\% dos itens.
+
+\paragraph{Comparação das variantes.} BRKGA, 64 instâncias $\times$ 5 sementes $\times$ 1\,s, cada execução num núcleo
+rápido; todas as 1600 soluções passaram pelo verificador independente.
+
+\begin{center}\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{5.6cm}cccc@{}}
+\toprule
+Variante & \makecell{\% exec.\\no ótimo} & \makecell{instâncias\\com falha} & \makecell{tempo até a\\melhor (s)} &
+\makecell{plano B: outra /\\caixa nova} \\ \midrule
+\textbf{posição por chave, BF + reescrita} (escolhida) & \textbf{99,7} & 1 (48: 1 de 5) & 0,099 & 31\% / 6\% \\
+posição fixa BL, BF + reescrita & 100,0 & 0 & 0,106 & 31\% / 6\% \\
+posição por chave, caixa seguinte + reescrita & 99,1 & 1 (48: 3 de 5) & 0,138 & 31\% / 7\% \\
+posição por chave, BF \textbf{sem} reescrita & 98,4 & 1 (48: 5 de 5) & 0,118 & 38\% / 6\% \\
+posição por chave, caixa nova direto & 72,2 & 27 & 0,438 & 0\% / 27\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{O que os números mostram.}
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item \textbf{A reescrita ajuda.} Na instância 48, a única que separa as variantes boas, a busca falha em 1 das 5
+  execuções com reescrita e nas 5 sem reescrita.
+\item \textbf{``Caixa nova direto'' é bem pior}: 72\% no ótimo e falhas em 27 instâncias. Confirma a desvantagem
+  prevista na Seção~\ref{sec:confunde}: com chaves aleatórias, muitos itens abrem caixa nova, e a busca não se recupera
+  em 1\,s.
+\item \textbf{BF e caixa seguinte} ficam próximos, com vantagem para o BF.
+\item \textbf{Posição por chave $\times$ posição fixa BL}: a diferença (1 falha em 320 execuções) é pequena demais para
+  concluir algo com 5 sementes.
+\end{itemize}
+\textbf{Ressalvas:} 5 sementes e 1\,s por execução, e só a instância 48 separa as variantes boas. A comparação definitiva
+deve usar mais sementes, o critério de parada escolhido e as instâncias maiores.
+
+% =====================================================================
+\section{Resumo: as representações discutidas}
 % =====================================================================
 \begin{center}\small
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.9cm}c>{\raggedright\arraybackslash}p{5.2cm}>{\raggedright\arraybackslash}p{4.6cm}@{}}
 \toprule
 Representação & Chaves & O que a metaheurística decide & Situação \\ \midrule
-$n$ (padrão atual) & 25 & ordem & implementada e testada \\
-$2n$, FF/BF por item & 50 & ordem + FF ou BF & implementada; empatou com $n$ \\
 $2n$ com 4 faixas & 50 & ordem + combinação caixa/posição & proposta (1ª conversa) \\
 $3n$ (regra por regra) & 75 & ordem + FF/BF + BL/BSSF & proposta (1ª conversa) \\
-\textbf{$3n$ com $K_0$ caixas} & 75 & ordem + \textbf{qual caixa} + posição & \textbf{proposta desta conversa} \\
-\textbf{ordem fixa} & 50 & qual caixa + posição & \textbf{proposta desta conversa} \\
+\textbf{$3n$ com $K_0$ caixas} & 75 & ordem + \textbf{qual caixa} + posição & \textbf{escolhida; implementada e testada} (Seção~\ref{sec:resultados}) \\
+ordem fixa & 50 & qual caixa + posição & descartada (Seção~\ref{sec:ordem}) \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 \noindent Todas mudam \textbf{só o decodificador}: o código do RKO não é alterado (ele só usa o tamanho do vetor).
-Nas 64 instâncias atuais, todas devem achar o mesmo número de caixas (a versão $n$ já acerta 100\%); as diferenças
-devem aparecer no tempo até a melhor solução, nas curvas de convergência e nas instâncias maiores.
 
 % =====================================================================
 \section{Pontos a confirmar com o professor}
 % =====================================================================
 \begin{enumerate}[leftmargin=*,itemsep=2pt]
-\item $K_0$: é ``área total / área da caixa''? E vale usar o LB completo (área e maior clique), que acerta mais?
-\item ``Ordem de inserção das caixas'': é a ordem dos \emph{itens}?
-\item Se o item não cabe na caixa escolhida: o plano B da Seção~\ref{sec:naocabe} (BF entre as abertas, depois caixa
-  nova) está de acordo?
+\item $K_0$: a escolha foi o LB completo (área e maior clique), que acerta mais que só a área. Está de acordo?
+\item ``Ordem de inserção das caixas'': era a ordem dos \emph{itens}? A decisão foi não fixá-la (Seção~\ref{sec:ordem}).
+\item Se o item não cabe na caixa escolhida: qual plano B o professor prefere, BF (consertar), caixa seguinte, ou
+  abrir uma caixa nova direto (deixar a escolha ruim custar caixas)? E vale reescrever a chave (Seção~\ref{sec:confunde})?
 \item Quais BRKGAs ele recomenda comparar?
 \end{enumerate}
 
@@ -245,10 +469,11 @@ devem aparecer no tempo até a melhor solução, nas curvas de convergência e n
 \section{Próximos passos}
 % =====================================================================
 \begin{enumerate}[leftmargin=*,itemsep=2pt]
-\item Implementar o decodificador ``$3n$ com $K_0$ caixas'' (ordem + qual caixa + posição), com o plano B.
-\item Implementar a variante de ordem fixa (área decrescente e grau de conflito decrescente).
+\item \textbf{Feito:} implementar o decodificador escolhido, com o plano B como parâmetro, a reescrita e a contagem de
+  uso do plano B (Seção~\ref{sec:resultados}).
 \item Registrar cada melhora nas execuções, para as curvas de convergência (pedido da primeira conversa).
-\item Comparar as representações com o mesmo protocolo: núcleos fixos, mais sementes, tempo suficiente.
+\item Repetir a comparação das variantes com mais sementes, o critério de parada definitivo e as instâncias
+  maiores, mantendo cada execução num núcleo fixo.
 \item Comparar BRKGAs: primeiro os dois do RKO; depois \texttt{brkgaAPI} e BRKGA-MP-IPR, se houver tempo.
 \end{enumerate}
 

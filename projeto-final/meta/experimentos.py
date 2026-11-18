@@ -41,23 +41,39 @@ CONFIGS = {f"BRKGA-{e}-{p}-{a}": ("config/brkga.conf", e, p, a)
 CONFIGS.update({f"RKO-{e}-{p}-{a}": ("config/rko.conf", e, p, a)
                 for e, p, a in itertools.product(["ff", "bf", "chave"], ["bssf", "bl"],
                                                  ["caixas", "desempate"])})
-GRUPOS = {"todas_variantes": [c for c in CONFIGS if c.startswith("BRKGA-")]}
+# Decodificador "caixa" (relatório da 2ª conversa): ordem + caixa (+ posição) por item,
+# K0 = LB caixas abertas, plano B e reescrita lamarckiana. Quinto campo = opções extras.
+CONFIGS.update({
+    "BRKGA-caixa-chave-bf-lam":      ("config/brkga.conf", "caixa", "chave", "desempate",
+                                      ["--planob", "bf", "--lamarck", "1"]),
+    "BRKGA-caixa-chave-bf-semlam":   ("config/brkga.conf", "caixa", "chave", "desempate",
+                                      ["--planob", "bf", "--lamarck", "0"]),
+    "BRKGA-caixa-chave-seguinte-lam": ("config/brkga.conf", "caixa", "chave", "desempate",
+                                       ["--planob", "seguinte", "--lamarck", "1"]),
+    "BRKGA-caixa-chave-nova":        ("config/brkga.conf", "caixa", "chave", "desempate",
+                                      ["--planob", "nova", "--lamarck", "1"]),
+    "BRKGA-caixa-bl-bf-lam":         ("config/brkga.conf", "caixa", "bl", "desempate",
+                                      ["--planob", "bf", "--lamarck", "1"]),
+})
+GRUPOS = {"todas_variantes": [c for c in CONFIGS if c.startswith("BRKGA-") and "-caixa-" not in c],
+          "caixa": [c for c in CONFIGS if c.startswith("BRKGA-caixa-")]}
 
 CAMPOS = ["config", "instancia", "semente", "caixas", "ofv", "LB", "tempo_melhor",
-          "tempo_total", "alvo", "valida"]
+          "tempo_total", "alvo", "valida", "pb_outra", "pb_nova"]
 
 
 CPUS_LIVRES: "queue.Queue[str] | None" = None   # núcleos para fixar as execuções (--cpus)
 
 
 def executar(config: str, numero: int, semente: int, tempo: int) -> dict:
-    conf, esc, pos, ava = CONFIGS[config]
+    conf, esc, pos, ava, *extra = CONFIGS[config]
+    extra = extra[0] if extra else []
     inst = load(numero)
     with tempfile.NamedTemporaryFile(suffix=".sol", delete=False) as tmp:
         arq = tmp.name
     cmd = [str(META / "rko_bppc"), str(instance_path(numero)), "--tempo", str(tempo),
            "--semente", str(semente), "--conf", conf, "--escolha", esc,
-           "--posic", pos, "--aval", ava, "--sol", arq]
+           "--posic", pos, "--aval", ava, "--sol", arq] + extra
     cpu = CPUS_LIVRES.get() if CPUS_LIVRES else None
     try:
         if cpu is not None:   # fixa a execução num núcleo, sem disputa com as outras
@@ -74,7 +90,8 @@ def executar(config: str, numero: int, semente: int, tempo: int) -> dict:
     return {"config": config, "instancia": inst.name, "semente": semente,
             "caixas": int(kv["caixas"]), "ofv": kv["ofv"], "LB": kv["LB"],
             "tempo_melhor": kv["tempo_melhor"], "tempo_total": kv["tempo_total"],
-            "alvo": kv["alvo"], "valida": int(ok and nb == int(kv["caixas"]))}
+            "alvo": kv["alvo"], "valida": int(ok and nb == int(kv["caixas"])),
+            "pb_outra": kv.get("pb_outra", ""), "pb_nova": kv.get("pb_nova", "")}
 
 
 def main() -> None:
@@ -109,7 +126,11 @@ def main() -> None:
     print(f"{len(tarefas)} execuções de até {a.tempo}s, {a.paralelo} em paralelo", flush=True)
     novo = not saida.exists()
     with open(saida, "a", newline="") as f, ThreadPoolExecutor(a.paralelo) as ex:
-        wr = csv.DictWriter(f, fieldnames=CAMPOS, delimiter=";")
+        campos = CAMPOS
+        if not novo:   # CSV antigo pode não ter as colunas novas: mantém o cabeçalho dele
+            with open(saida) as g:
+                campos = g.readline().strip().split(";")
+        wr = csv.DictWriter(f, fieldnames=campos, delimiter=";", extrasaction="ignore")
         if novo:
             wr.writeheader()
         futuros = [ex.submit(executar, c, k, s, a.tempo) for c, k, s in tarefas]

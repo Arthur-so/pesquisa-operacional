@@ -224,3 +224,45 @@ Q-Learning. Arquivos: `resultados/meta/variantes64.csv`, `resultados/meta/rko64.
 - O tempo total médio da metaheurística (~0,5 s) é dominado pelas 32 instâncias em que o ótimo é
   maior que o LB: nelas, a execução vai até o limite de 1 s.
 - O RKO acha a melhor solução ~1,7× mais rápido (0,030 s contra 0,052 s), mas usa 10 threads contra 1.
+
+### C8. Decodificador "caixa" (2ª conversa com o professor): implementação e primeiros resultados
+**O que foi implementado** (`meta/src/Problem_2BPPC.h`, função `DecodificaCaixa`; opção `--escolha caixa`):
+- vetor com 3 chaves por item: ordem (`rk[0..n)`), caixa (`rk[n..2n)`) e regra de posição (`rk[2n..3n)`:
+  < 0,5 → BL, ≥ 0,5 → BSSF; com `--posic bl` o bloco 3 não existe e o vetor tem 2n chaves);
+- K₀ = LB completo (área e maior clique) caixas abertas no início; com K caixas abertas, a caixa do item é
+  ⌊r·K⌋ (0-based);
+- plano B quando o item não cabe na caixa da chave (`--planob`): `bf` (a mais cheia que serve; senão caixa nova),
+  `seguinte` (k+1, k+2, … com volta; senão nova) ou `nova` (caixa nova direto);
+- reescrita lamarckiana (`--lamarck 1`): se o plano B pôs o item noutra caixa **aberta**, a chave dele vira
+  (k+0,5)/K. Se foi para uma caixa nova, a chave fica (nenhuma chave aponta uma caixa ainda não aberta);
+- as caixas iniciais que sobram vazias não contam; as usadas são renumeradas 1, 2, … na saída;
+- estatística do plano B na linha `RESULTADO` (`pb_outra`, `pb_nova`).
+- O RKO não foi alterado. No BRKGA, o decodificador recebe o próprio indivíduo (`MH/BRKGA.h`, linhas 84, 191,
+  245, 257) e o Nelder-Mead copia o melhor vetor decodificado de volta (`Method.h:481`): as chaves reescritas ficam.
+
+**Teste da reescrita** (`--teste-lamarck 2000`, instâncias 02, 03, 13, 17, 46, 48, 53, 55, os três planos B):
+decodificar de novo o vetor reescrito deu **a mesma solução em 48.000/48.000 casos**, e na 2ª decodificação nenhum
+item precisou ir para outra caixa aberta. Com chaves aleatórias, o plano B BF manda 30–43% dos itens para outra
+caixa e 6–11% para uma caixa nova; o plano B "nova" abre caixa nova para 22–42% dos itens.
+
+**Comparação** (BRKGA, 64 inst. × 5 sementes × 1 s, 3 execuções simultâneas com núcleo fixo; arquivo
+`resultados/meta/caixa64.csv`; referência: decodificador atual em `variantes64.csv`, mesmo protocolo):
+
+| decodificador | % no ótimo | inst. com falha | tempo até a melhor (s) |
+|---|---|---|---|
+| atual (n chaves, FF + BL) | 100,0 | 0 | 0,052 |
+| caixa, posição fixa BL, BF + reescrita | 100,0 | 0 | 0,106 |
+| **caixa + posição por chave, BF + reescrita** (o escolhido) | 99,7 | 1 (48: 1/5) | 0,099 |
+| caixa + posição por chave, caixa seguinte + reescrita | 99,1 | 1 (48: 3/5) | 0,138 |
+| caixa + posição por chave, BF **sem** reescrita | 98,4 | 1 (48: 5/5) | 0,118 |
+| caixa + posição por chave, caixa nova direto | 72,2 | 27 | 0,438 |
+
+Leitura:
+- O decodificador novo funciona (todas as 1600 soluções válidas) e chega ao ótimo quase sempre, mas é **~2× mais
+  lento** que o atual para achar a melhor solução, e nestas instâncias não melhora a qualidade (o atual já acerta
+  100%). Hipótese: vetor maior (75 chaves contra 25) e muitas escolhas de caixa caindo no plano B.
+- **A reescrita lamarckiana ajuda:** na 48 (a única que discrimina), 1 falha em 5 com reescrita contra 5 em 5 sem.
+- **"Caixa nova direto" é claramente pior:** 72% no ótimo e falhas em 27 instâncias. Confirma a desvantagem
+  prevista: com chaves aleatórias, ~27% dos itens abrem caixa nova, e a busca não se recupera em 1 s.
+- Ressalvas: 5 sementes e 1 s; só a 48 separa as variantes boas. A comparação que importa deve ser repetida com
+  mais sementes, com o critério de parada definitivo e nas instâncias maiores.

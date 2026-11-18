@@ -89,10 +89,13 @@ Os resultados oficiais estão em `resultados/ampl/resultados.csv` (tempo total: 
 
 ### 4. Metaheurística: uma execução
 
+A metaheurística é o **BRKGA** (do arcabouço RKO) com o decodificador do projeto: cada item tem 3 chaves (ordem,
+caixa e regra de posição), começam abertas K₀ = LB caixas, e o plano B com reescrita lamarckiana trata os itens que
+não cabem na caixa escolhida (ver `docs/retorno_professor_2/retorno_professor_2.pdf`, Figura 2).
+
 ```bash
 cd meta
-./rko_bppc ../2bppc/2kdc48 --tempo 5 --semente 1 --conf config/brkga.conf \
-           --escolha ff --posic bl --aval desempate --sol saida48.sol
+./rko_bppc ../2bppc/2kdc48 --tempo 5 --semente 1 --conf config/brkga.conf --sol saida48.sol
 cd ..
 PYTHONPATH=src .venv/bin/python -m bppc.plot 48 meta/saida48.sol caixas48.png   # confere e desenha
 ```
@@ -100,35 +103,46 @@ PYTHONPATH=src .venv/bin/python -m bppc.plot 48 meta/saida48.sol caixas48.png   
 Saída esperada:
 
 ```
-RESULTADO ../2bppc/2kdc48 semente=1 caixas=4 ofv=4.751600 LB=4 tempo_melhor=0.459 tempo_total=0.459 alvo=1 ...
+RESULTADO ../2bppc/2kdc48 semente=1 caixas=4 ofv=4.754800 LB=4 tempo_melhor=0.642 tempo_total=0.642 alvo=1 ...
+          ... escolha=caixa posic=chave aval=desempate planob=bf lamarck=1 pb_outra=0.3055 pb_nova=0.0737
 ```
 
 - `caixas`: nº de caixas da melhor solução; `tempo_melhor`: quando ela foi achada; `tempo_total`: duração da execução;
 - `alvo=1`: atingiu o LB (ótimo provado) e parou antes do tempo; `alvo=0`: rodou até o limite;
-- `--conf config/brkga.conf` = só o BRKGA; `--conf config/rko.conf` = RKO completo (10 metaheurísticas);
-- `--escolha ff|bf|chave`, `--posic bl|bssf`, `--aval desempate|caixas`: variantes do decodificador;
+- `pb_outra` / `pb_nova`: fração dos itens que não couberam na caixa da chave e foram para outra caixa aberta / para
+  uma caixa nova (plano B), somando todas as decodificações da busca;
 - a mesma semente refaz a mesma busca.
 
-### 5. Metaheurística: várias execuções (≈ 2 min para o BRKGA, ≈ 3 min para o RKO)
+Opções do decodificador (os valores padrão são os escolhidos):
+
+| opção | valores | padrão |
+|---|---|---|
+| `--posic` | `chave` (a chave do item escolhe BL ou BSSF), `bl`, `bssf` (regra fixa) | `chave` |
+| `--planob` | `bf` (a mais cheia que serve; senão caixa nova), `seguinte` (k+1, k+2, …), `nova` (caixa nova direto) | `bf` |
+| `--lamarck` | `1` (reescreve a chave quando o plano B muda a caixa), `0` | `1` |
+| `--aval` | `desempate` (caixas + ocupação da mais vazia), `caixas` | `desempate` |
+
+Teste da reescrita, sem rodar a metaheurística: `./rko_bppc ../2bppc/2kdc48 --teste-lamarck 2000` confere que
+decodificar de novo um vetor reescrito dá a mesma solução.
+
+### 5. Metaheurística: várias execuções (≈ 3 min)
 
 ```bash
 # BRKGA: 64 instâncias × 5 sementes × 1 s, 3 execuções por vez, cada uma num núcleo rápido
-.venv/bin/python meta/experimentos.py --exp meu_brkga --configs BRKGA-ff-bl-desempate \
+.venv/bin/python meta/experimentos.py --exp meu_brkga --configs BRKGA-caixa-chave-bf-lam \
        --tempo 1 --sementes 5 --cpus 0,2,4
-# RKO completo: uma execução por vez (ele já usa 10 threads)
-.venv/bin/python meta/experimentos.py --exp meu_rko --configs RKO-ff-bl-desempate \
-       --tempo 1 --sementes 5 --paralelo 1
-
 .venv/bin/python meta/analisar.py resultados/meta/meu_brkga.csv --por-instancia
 ```
 
 `analisar.py` mostra a % de execuções que acharam o ótimo do exato, o tempo médio até a melhor solução e quantas
-soluções foram inválidas (deve ser 0). Para comparar com os resultados oficiais:
+soluções foram inválidas (deve ser 0). Para comparar com o resultado oficial (99,7 % no ótimo, 0,099 s):
 
 ```bash
-.venv/bin/python meta/analisar.py resultados/meta/variantes64.csv   # BRKGA oficial (100 %, 0,052 s)
-.venv/bin/python meta/analisar.py resultados/meta/rko64.csv         # RKO oficial (99,7 %, 0,030 s)
+.venv/bin/python meta/analisar.py resultados/meta/caixa64.csv
 ```
+
+Variantes prontas para comparar: `--configs caixa` roda as cinco (`BRKGA-caixa-chave-bf-lam`,
+`-chave-bf-semlam`, `-chave-seguinte-lam`, `-chave-nova`, `-bl-bf-lam`).
 
 **Cuidado com execuções simultâneas:** o limite é de tempo de relógio. Use `--cpus 0,2,4` (um núcleo rápido
 por execução) em vez de `--paralelo 10`, ou a carga da máquina muda os resultados
@@ -139,10 +153,8 @@ use outro nome.
 
 ```bash
 .venv/bin/python scripts/auditar_cortes.py      # reconfere com CP-SAT os cortes do exato (lê resultados/ampl/logs)
-.venv/bin/python scripts/tabelas.py --meta BRKGA=resultados/meta/variantes64.csv:BRKGA-ff-bl-desempate \
-                                           RKO=resultados/meta/rko64.csv:RKO-ff-bl-desempate
-.venv/bin/python scripts/graficos.py BRKGA=resultados/meta/variantes64.csv:BRKGA-ff-bl-desempate \
-                                     RKO=resultados/meta/rko64.csv:RKO-ff-bl-desempate
+.venv/bin/python scripts/tabelas.py --meta BRKGA=resultados/meta/caixa64.csv:BRKGA-caixa-chave-bf-lam
+.venv/bin/python scripts/graficos.py BRKGA=resultados/meta/caixa64.csv:BRKGA-caixa-chave-bf-lam
 ```
 
 No AMPL interativo (de dentro de `ampl/`): `model bppc.mod; data dat/2kdc50.dat; include bppc.run;`

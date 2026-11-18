@@ -14,14 +14,18 @@
 
 // ------------------- Variantes do decodificador ----------------------
 // Definidas pela linha de comando ANTES de ReadData (ver rko_bppc.cpp).
-enum Escolha { FF = 0, BF = 1, CHAVE = 2 };      // regra de escolha da caixa
-enum Posic   { BSSF = 0, BL = 1 };               // regra de posicionamento
-enum Aval    { SO_CAIXAS = 0, DESEMPATE = 1 };   // função de avaliação
+enum Escolha { FF = 0, BF = 1, CHAVE = 2, CAIXA = 3 };  // regra de escolha da caixa
+enum Posic   { BSSF = 0, BL = 1, PCHAVE = 2 };           // regra de posicionamento
+enum Aval    { SO_CAIXAS = 0, DESEMPATE = 1 };           // função de avaliação
+enum PlanoB  { PB_BF = 0, PB_SEGUINTE = 1, PB_NOVA = 2 }; // modo CAIXA: item não cabe na caixa da chave
 
 struct DecoderConfig {
-    int escolha = FF;       // CHAVE => vetor de 2n chaves
-    int posic = BSSF;
+    int escolha = FF;       // CHAVE => 2n chaves (ordem + FF/BF por item)
+                            // CAIXA => a chave do item escolhe a caixa (ver DecodificaCaixa)
+    int posic = BSSF;       // PCHAVE => uma chave por item escolhe BL (<0,5) ou BSSF (>=0,5)
     int aval = DESEMPATE;
+    int planob = PB_BF;     // só no modo CAIXA
+    bool lamarck = true;    // só no modo CAIXA: reescreve a chave quando o plano B muda a caixa
 };
 DecoderConfig g_cfg;
 
@@ -52,6 +56,11 @@ double get_time_in_seconds();                    // definida em Method.h
 // Ao atingir o alvo, zeramos MAXTIME do objeto do main (não-const) por este
 // ponteiro; todas as metaheurísticas o releem a cada iteração e param.
 TRunData *g_runData = nullptr;
+
+// Estatística do plano B (modo CAIXA): quantos itens foram decodificados e quantos não
+// couberam na caixa escolhida pela chave (foram para outra caixa aberta ou para uma nova).
+struct EstatPlanoB { long itens = 0, outra = 0, nova = 0; };
+std::atomic<long> g_pb_itens(0), g_pb_outra(0), g_pb_nova(0);
 
 // ===================== Leitura da instância ==========================
 // Limitante inferior: max(ceil(área/WH), maior clique no grafo estendido)
@@ -99,7 +108,10 @@ void ReadData(char name[], TProblemData &data)
     int clq = maiorClique(ext, (n == 32) ? 0xFFFFFFFFu : ((1u << n) - 1), 0, 0);
     data.LB = std::max(lbArea, clq);
 
-    data.n = (g_cfg.escolha == CHAVE) ? 2 * n : n;
+    if (g_cfg.escolha == CAIXA)                  // ordem + caixa (+ posição, se PCHAVE)
+        data.n = (g_cfg.posic == PCHAVE) ? 3 * n : 2 * n;
+    else
+        data.n = (g_cfg.escolha == CHAVE) ? 2 * n : n;
 }
 
 // ====================== Maximal Rectangles ===========================
@@ -216,9 +228,100 @@ double Decodifica(const std::vector<double> &rk, const TProblemData &data,
     return ofv;
 }
 
+// ===================== Decodificador modo CAIXA ========================
+// Vetor: rk[0..n)   = ordem dos itens (menor chave primeiro)
+//        rk[n..2n)  = caixa de cada item: com K caixas abertas, caixa = floor(r*K)
+//        rk[2n..3n) = regra de posição de cada item (só se posic == PCHAVE)
+// Começa com K0 = LB caixas abertas (vazias). Se o item não cabe na caixa da chave,
+// entra o plano B: BF (a mais cheia que serve; senão caixa nova), caixa seguinte
+// (k+1, k+2, ... com volta; senão nova) ou caixa nova direto.
+// Lamarck: se o plano B pôs o item noutra caixa ABERTA, a chave dele é reescrita para
+// apontar essa caixa ((k+0,5)/K), e decodificar de novo dá a mesma solução sem plano B.
+// Se foi para uma caixa nova, a chave fica como está (nenhuma chave aponta caixa ainda
+// não aberta, e o resultado já se repete).
+static inline bool cabeNaCaixa(const Caixa &c, int i, const TProblemData &data, int regra,
+                               int &x, int &y)
+{
+    const long WH = (long)data.W * data.H;
+    if (c.itens & data.conf[i]) return false;                          // conflito
+    if (c.area + (long)data.w[i] * data.h[i] > WH) return false;       // área
+    long s1 = 0, s2 = 0;
+    return acharPosicao(c, data.w[i], data.h[i], regra, x, y, s1, s2); // geometria
+}
+
+double DecodificaCaixa(std::vector<double> &rk, const TProblemData &data,
+                       std::vector<Posicao> *saida, bool reescrever, EstatPlanoB *est)
+{
+    const int n = data.nItems;
+    const long WH = (long)data.W * data.H;
+    int ordem[32];
+    for (int i = 0; i < n; i++) ordem[i] = i;
+    std::sort(ordem, ordem + n, [&](int a, int b) { return rk[a] < rk[b]; });
+
+    std::vector<Caixa> caixas(std::max(1, data.LB));                  // K0 = LB completo
+    for (Caixa &c : caixas) c.livres.push_back({0, 0, data.W, data.H});
+    if (saida) saida->clear();
+
+    for (int t = 0; t < n; t++) {
+        const int i = ordem[t];
+        const int regra = (g_cfg.posic == PCHAVE) ? ((rk[2 * n + i] < 0.5) ? BL : BSSF) : g_cfg.posic;
+        const int K = (int)caixas.size();
+        int k = std::min((int)(rk[n + i] * K), K - 1);                 // caixa da chave
+        int x = 0, y = 0;
+        int kSel = -1, xSel = 0, ySel = 0;
+        if (cabeNaCaixa(caixas[k], i, data, regra, x, y)) {
+            kSel = k; xSel = x; ySel = y;
+        } else if (g_cfg.planob == PB_BF) {                            // a mais cheia que serve
+            for (int j = 0; j < K; j++) {
+                if (j == k || !cabeNaCaixa(caixas[j], i, data, regra, x, y)) continue;
+                if (kSel < 0 || caixas[j].area > caixas[kSel].area) { kSel = j; xSel = x; ySel = y; }
+            }
+        } else if (g_cfg.planob == PB_SEGUINTE) {                      // k+1, k+2, ... (volta)
+            for (int d = 1; d < K && kSel < 0; d++) {
+                int j = (k + d) % K;
+                if (cabeNaCaixa(caixas[j], i, data, regra, x, y)) { kSel = j; xSel = x; ySel = y; }
+            }
+        }                                                              // PB_NOVA: não procura
+        if (est) est->itens++;
+        if (kSel < 0) {                                                // caixa nova
+            Caixa nova;
+            nova.livres.push_back({0, 0, data.W, data.H});
+            caixas.push_back(nova);
+            kSel = (int)caixas.size() - 1; xSel = 0; ySel = 0;
+            if (est) est->nova++;
+        } else if (kSel != k) {
+            if (est) est->outra++;
+            if (reescrever) rk[n + i] = (kSel + 0.5) / K;               // Lamarck
+        }
+        colocar(caixas[kSel], xSel, ySel, data.w[i], data.h[i]);
+        caixas[kSel].itens |= (1u << i);
+        if (saida) saida->push_back({i, kSel, xSel, ySel});
+    }
+
+    // caixas usadas (as K0 iniciais podem ter sobrado vazias) e renumeração compacta
+    std::vector<int> novoNum(caixas.size(), -1);
+    int usadas = 0;
+    long menor = WH;
+    for (size_t k = 0; k < caixas.size(); k++)
+        if (caixas[k].itens) { novoNum[k] = usadas++; menor = std::min(menor, caixas[k].area); }
+    if (saida) for (Posicao &p : *saida) p.caixa = novoNum[p.caixa];
+    double ofv = (double)usadas;
+    if (g_cfg.aval == DESEMPATE) ofv += (double)menor / (double)WH;   // em [0,1)
+    return ofv;
+}
+
 double Decoder(TSol &s, const TProblemData &data)
 {
-    double ofv = Decodifica(s.rk, data, nullptr);
+    double ofv;
+    if (g_cfg.escolha == CAIXA) {
+        EstatPlanoB est;
+        ofv = DecodificaCaixa(s.rk, data, nullptr, g_cfg.lamarck, &est);
+        g_pb_itens.fetch_add(est.itens, std::memory_order_relaxed);
+        g_pb_outra.fetch_add(est.outra, std::memory_order_relaxed);
+        g_pb_nova.fetch_add(est.nova, std::memory_order_relaxed);
+    } else {
+        ofv = Decodifica(s.rk, data, nullptr);
+    }
     if (ofv < g_best_ofv.load()) {
         #pragma omp critical(melhor_global)
         {

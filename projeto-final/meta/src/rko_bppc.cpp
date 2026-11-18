@@ -73,8 +73,9 @@ int main(int argc, char *argv[])
 {
     if (argc < 2) {
         printf("uso: %s <instancia> --tempo T --semente S --conf arq.conf "
-               "[--escolha ff|bf|chave] [--posic bssf|bl] [--aval caixas|desempate] "
-               "[--sol saida.sol]\n", argv[0]);
+               "[--escolha ff|bf|chave|caixa] [--posic bssf|bl|chave] [--aval caixas|desempate] "
+               "[--planob bf|seguinte|nova] [--lamarck 1|0] [--sol saida.sol] [--teste-lamarck N]\n",
+               argv[0]);
         return 1;
     }
     char nameInstance[256];
@@ -83,14 +84,22 @@ int main(int argc, char *argv[])
     runData.MAXTIME = atoi(arg(argc, argv, "--tempo", "10"));
     unsigned semente = (unsigned)atol(arg(argc, argv, "--semente", "1"));
     const char *conf = arg(argc, argv, "--conf", "config/brkga.conf");
-    std::string esc = arg(argc, argv, "--escolha", "ff");
-    std::string pos = arg(argc, argv, "--posic", "bssf");
+    std::string esc = arg(argc, argv, "--escolha", "caixa");   // padrão: decodificador da Figura 2
+    std::string pos = arg(argc, argv, "--posic", "chave");
     std::string ava = arg(argc, argv, "--aval", "desempate");
     const char *arqSol = arg(argc, argv, "--sol", "");
+    std::string pb = arg(argc, argv, "--planob", "bf");
+    int lam = atoi(arg(argc, argv, "--lamarck", "1"));
+    int nTeste = atoi(arg(argc, argv, "--teste-lamarck", "0"));
 
-    g_cfg.escolha = (esc == "bf") ? BF : (esc == "chave") ? CHAVE : FF;
-    g_cfg.posic = (pos == "bl") ? BL : BSSF;
+    g_cfg.escolha = (esc == "bf") ? BF : (esc == "chave") ? CHAVE : (esc == "caixa") ? CAIXA : FF;
+    g_cfg.posic = (pos == "bl") ? BL : (pos == "chave") ? PCHAVE : BSSF;
     g_cfg.aval = (ava == "caixas") ? SO_CAIXAS : DESEMPATE;
+    g_cfg.planob = (pb == "seguinte") ? PB_SEGUINTE : (pb == "nova") ? PB_NOVA : PB_BF;
+    g_cfg.lamarck = (lam != 0);
+    if (g_cfg.posic == PCHAVE && g_cfg.escolha != CAIXA) {
+        printf("ERRO: --posic chave só existe com --escolha caixa\n"); return 1;
+    }
 
     // ----- metaheurísticas e parâmetros do arquivo de configuração -----
     #define TOTAL_MH 11
@@ -129,6 +138,40 @@ int main(int argc, char *argv[])
     const int tempoMax = runData.MAXTIME;     // MAXTIME vira 0 se o alvo for atingido
     g_runData = &runData;
 
+    // ------------- modo de teste da reescrita lamarckiana (modo CAIXA) -------------
+    // Decodifica N vetores aleatórios COM reescrita; decodifica de novo o vetor reescrito
+    // SEM reescrita e confere se a solução é idêntica (caixas e posições) e se, na 2a vez,
+    // nenhum item precisou do plano B para ir a outra caixa aberta.
+    if (nTeste > 0) {
+        if (g_cfg.escolha != CAIXA) { printf("ERRO: --teste-lamarck exige --escolha caixa\n"); return 1; }
+        rng.seed(semente);
+        int iguais = 0, semOutra = 0;
+        EstatPlanoB tot1, tot2;
+        for (int t = 0; t < nTeste; t++) {
+            std::vector<double> rk(data.n);
+            for (double &v : rk) v = randomico(0, 1);
+            std::vector<Posicao> s1, s2;
+            EstatPlanoB e1, e2;
+            double o1 = DecodificaCaixa(rk, data, &s1, true, &e1);
+            std::vector<double> rk2 = rk;
+            double o2 = DecodificaCaixa(rk2, data, &s2, false, &e2);
+            bool igual = (o1 == o2) && s1.size() == s2.size();
+            for (size_t q = 0; igual && q < s1.size(); q++)
+                igual = s1[q].item == s2[q].item && s1[q].caixa == s2[q].caixa &&
+                        s1[q].x == s2[q].x && s1[q].y == s2[q].y;
+            iguais += igual;
+            semOutra += (e2.outra == 0);
+            tot1.itens += e1.itens; tot1.outra += e1.outra; tot1.nova += e1.nova;
+            tot2.itens += e2.itens; tot2.outra += e2.outra; tot2.nova += e2.nova;
+        }
+        printf("TESTE_LAMARCK %s planob=%s N=%d iguais=%d sem_planob_outra_na_2a=%d "
+               "1a: outra=%.1f%% nova=%.1f%% | 2a: outra=%.1f%% nova=%.1f%%\n",
+               nameInstance, pb.c_str(), nTeste, iguais, semOutra,
+               100.0 * tot1.outra / tot1.itens, 100.0 * tot1.nova / tot1.itens,
+               100.0 * tot2.outra / tot2.itens, 100.0 * tot2.nova / tot2.itens);
+        return (iguais == nTeste) ? 0 : 2;
+    }
+
     // ------------------------------ execução ------------------------------
     rng.seed(semente);
     double start_time = get_time_in_seconds(), end_time = start_time;
@@ -165,15 +208,20 @@ int main(int argc, char *argv[])
 
     // ------------------------------ saída ---------------------------------
     std::vector<Posicao> sol;
-    double ofv = Decodifica(g_best_rk, data, &sol);
+    double ofv = (g_cfg.escolha == CAIXA) ? DecodificaCaixa(g_best_rk, data, &sol, false, nullptr)
+                                          : Decodifica(g_best_rk, data, &sol);
+    const long pbItens = std::max(1L, g_pb_itens.load());
     int caixas = 0;
     for (auto &p : sol) caixas = std::max(caixas, p.caixa + 1);
     std::string mhs;
     for (int i = 0; i < NUM_MH; i++) { if (i) mhs += "+"; mhs += algorithms[i]; }
     printf("RESULTADO %s semente=%u caixas=%d ofv=%.6f LB=%d tempo_melhor=%.3f "
-           "tempo_total=%.3f alvo=%d mh=%s escolha=%s posic=%s aval=%s\n",
+           "tempo_total=%.3f alvo=%d mh=%s escolha=%s posic=%s aval=%s planob=%s lamarck=%d "
+           "pb_outra=%.4f pb_nova=%.4f\n",
            nameInstance, semente, caixas, ofv, data.LB, g_best_time, end_time - start_time,
-           (int)g_alvo.load(), mhs.c_str(), esc.c_str(), pos.c_str(), ava.c_str());
+           (int)g_alvo.load(), mhs.c_str(), esc.c_str(), pos.c_str(), ava.c_str(),
+           (g_cfg.escolha == CAIXA) ? pb.c_str() : "-", (int)g_cfg.lamarck,
+           (double)g_pb_outra.load() / pbItens, (double)g_pb_nova.load() / pbItens);
     if (arqSol[0]) {
         FILE *f = fopen(arqSol, "w");
         fprintf(f, "# %s caixas=%d mh=%s semente=%u\n", nameInstance, caixas, mhs.c_str(), semente);
