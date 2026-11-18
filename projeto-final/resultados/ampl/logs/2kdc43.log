@@ -1,0 +1,20 @@
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.9998799999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9742339999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9634860000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9443510000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9113689999999
+2kdc43: status=otimo caixas=19 LB=19 UB_heur=19 tempo=0.10s iter=1 cortes=0 opp=4 t_opp=0.07s
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600

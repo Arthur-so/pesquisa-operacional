@@ -1,0 +1,66 @@
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.999914
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9742590000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9623120000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.948762
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9394189999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9316279999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9086120000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9018879999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8828560000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8552759999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.829154
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.819532
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7833260000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7602529999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7330219999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7166510000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6950830000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6788080000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6632930000001
+2kdc34: status=otimo caixas=8 LB=8 UB_heur=8 tempo=0.35s iter=2 cortes=1 opp=21 t_opp=0.28s
+CORTE 3 18 21
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+presolve: constraint Abaixo[1,15] cannot hold:
+	body <= -18 cannot be >= -16; difference = -2
+presolve: constraint Abaixo[1,15] cannot hold:
+	body <= -18 cannot be >= -16; difference = -2
+presolve: constraint Abaixo[1,15] cannot hold:
+	body <= -18 cannot be >= -16; difference = -2
+presolve: constraint Abaixo[1,15] cannot hold:
+	body <= -18 cannot be >= -16; difference = -2

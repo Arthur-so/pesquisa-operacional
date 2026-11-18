@@ -1,0 +1,46 @@
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.9999379999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.981843
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9723819999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9461889999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.932456
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9178619999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.90391
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.8887679999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8556440000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8291260000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8044789999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7951440000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7816029999999
+2kdc35: status=otimo caixas=17 LB=17 UB_heur=17 tempo=0.23s iter=2 cortes=1 opp=14 t_opp=0.17s
+CORTE 15 17 18
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+presolve: constraint Abaixo[6,24] cannot hold:
+	body <= -39 cannot be >= -35; difference = -4
+presolve: constraint Abaixo[6,24] cannot hold:
+	body <= -39 cannot be >= -35; difference = -4
+presolve: constraint Abaixo[6,24] cannot hold:
+	body <= -39 cannot be >= -35; difference = -4

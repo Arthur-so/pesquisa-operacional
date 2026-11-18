@@ -1,0 +1,62 @@
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.9999360000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9785080000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9694979999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9573569999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9416930000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.926211
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9117839999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.88474
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8602249999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.82998
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.8006289999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7723190000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7570270000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7316860000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.723622
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7036910000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6884530000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.664084
+2kdc33: status=otimo caixas=8 LB=8 UB_heur=8 tempo=0.36s iter=2 cortes=1 opp=20 t_opp=0.30s
+CORTE 17 11 22
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+presolve: constraint Abaixo[24,25] cannot hold:
+	body <= -2 cannot be >= -1; difference = -1
+presolve: constraint Abaixo[24,25] cannot hold:
+	body <= -2 cannot be >= -1; difference = -1
+presolve: constraint Abaixo[24,25] cannot hold:
+	body <= -2 cannot be >= -1; difference = -1
+presolve: constraint Abaixo[24,25] cannot hold:
+	body <= -2 cannot be >= -1; difference = -1

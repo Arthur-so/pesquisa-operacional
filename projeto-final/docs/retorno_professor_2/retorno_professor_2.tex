@@ -1,0 +1,255 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[brazil]{babel}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,array,makecell}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,calc,decorations.pathreplacing,shapes.misc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+
+\definecolor{azul}{HTML}{2A78D6}
+\definecolor{laranja}{HTML}{EB6834}
+\definecolor{verde}{HTML}{1BAF7A}
+\definecolor{amarelo}{HTML}{EDA100}
+\definecolor{roxo}{HTML}{7C3AED}
+\definecolor{vermelho}{HTML}{B3261E}
+\definecolor{cinza}{HTML}{6B6A64}
+
+\newcommand{\quadro}[3]{\begin{center}\fcolorbox{#1}{#1!6}{\begin{minipage}{0.95\textwidth}\small
+\textbf{#2}\ #3\end{minipage}}\end{center}}
+
+\tikzset{
+  chave/.style={draw=black!60, minimum width=7mm, minimum height=7mm, font=\scriptsize, inner sep=0pt},
+  seta/.style={-{Stealth[length=2.2mm]}, thick, draw=black!70},
+  chaveta/.style={decorate, decoration={brace, amplitude=4pt, mirror}, thick, draw=black!60},
+  proc/.style={rectangle, rounded corners=2pt, draw=black!65, fill=white, align=center, font=\small,
+               inner sep=3pt, minimum height=7mm, text width=#1}, proc/.default=4.6cm,
+  dec/.style={chamfered rectangle, chamfered rectangle xsep=2mm, draw=amarelo!80!black, fill=amarelo!18,
+              align=center, font=\small, text width=#1, inner sep=2pt, minimum height=7mm}, dec/.default=4.4cm,
+  ok/.style={rectangle, rounded corners=2pt, draw=verde!80!black, fill=verde!15, align=center, font=\small,
+             inner sep=3pt, minimum height=7mm, text width=#1}, ok/.default=3.4cm,
+  rot/.style={font=\scriptsize, text=black!75, fill=white, inner sep=1pt},
+}
+
+\title{\textbf{Retorno do professor --- segunda conversa}\\[2pt]\large Projeto 2BPPC: representação da solução e
+comparação de BRKGAs}
+\author{Arthur Santos de Oliveira --- Pesquisa Operacional, UNIFESP--ICT}
+\date{novembro de 2026}
+
+\begin{document}
+\maketitle
+
+\noindent Este relatório registra uma \textbf{nova conversa} com o professor. A primeira está em
+\nolinkurl{docs/retorno_professor/retorno_professor.pdf}; os pontos daqui complementam aqueles.
+
+% =====================================================================
+\section{O que o professor disse}
+% =====================================================================
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+\item O vetor de chaves pode ser separado em \textbf{mais partes}, cada uma com uma decisão:
+  \begin{itemize}[itemsep=0pt]
+  \item uma \textbf{quantidade inicial de caixas}, calculada pela área (``área total / área da \dots'', algo assim).
+    É isso que permite usar o \emph{Best Fit} de verdade;
+  \item \textbf{para qual caixa} cada item vai;
+  \item as \textbf{regras de posição} dentro da caixa.
+  \end{itemize}
+\item Talvez \textbf{fixar a ordem de inserção}: isso tiraria uma decisão da metaheurística.
+\item Dá para \textbf{comparar BRKGAs}: existem diferentes implementações.
+\end{enumerate}
+
+% =====================================================================
+\section{Caixas iniciais e ``para qual caixa''}
+% =====================================================================
+\subsection{Por que abrir caixas no começo ajuda o Best Fit}
+Hoje o decodificador abre caixas \textbf{sob demanda}: começa com uma, e só abre outra quando o item não cabe em
+nenhuma. Nos primeiros itens há pouquíssimas caixas abertas, então ``a primeira que serve'' (FF) e ``a mais cheia''
+(BF) quase sempre escolhem a mesma. \textbf{Isso pode explicar por que FF e BF empataram nos testes} (hipótese).
+
+Abrindo $K_0$ caixas vazias logo no início, cada item tem várias caixas para escolher desde o começo, e a escolha
+passa a fazer diferença.
+
+\subsection{Quantas caixas iniciais: $K_0$}
+A conta sugerida é a do limitante pela área:
+\[
+K_0 = \left\lceil \frac{\text{área total dos itens}}{\text{área de uma caixa}} \right\rceil = \left\lceil
+\frac{\sum_i w_i h_i}{W\,H} \right\rceil .
+\]
+Nos dados, essa conta \textbf{subestima} o número de caixas:
+
+\begin{center}\small
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+& inst.\ 3 (III) & inst.\ 13 (I) & inst.\ 53 (I) & inst.\ 55 (III) & inst.\ 48 (IV) \\ \midrule
+$K_0$ pela área & 12 & 5 & 3 & 3 & 4 \\
+ótimo & 20 & 7 & 4 & 3 & 4 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Em só \textbf{12 das 64} instâncias $K_0$ é igual ao ótimo; em média fica 2,1 caixas abaixo, e no tipo III (itens
+grandes) 5,3 abaixo. Isso não impede o método (o decodificador abre caixas extras quando precisa, ver a
+Seção~\ref{sec:naocabe}), mas sugere uma alternativa:
+
+\quadro{azul}{Alternativa para $K_0$:}{usar o \textbf{LB completo}, $K_0=\max(\lceil\text{área}/WH\rceil,\ \text{maior
+clique})$, que já é calculado no projeto. No tipo III, onde a área erra mais, a maior clique domina (na instância 3, o
+LB é 19 para um ótimo de 20).}
+
+\subsection{O vetor com as novas partes}
+Com $K_0$ calculado antes, o vetor fica com três blocos de $n$ chaves ($3n$ no total):
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+  \foreach \bl/\x/\cor/\vals in {1/0/azul/{{0,72},{0,15},{0,93}}, 2/4.4/roxo/{{0,81},{0,07},{0,44}}, 3/8.8/verde/{{0,64},{0,22},{0,51}}} {
+    \foreach \v [count=\k] in \vals {
+      \node[chave, fill=\cor!18] at ({\x+(\k-1)*0.72},0) {\v};
+    }
+    \node[font=\small] at ({\x+2.35},0) {$\cdots$};
+    \node[font=\scriptsize, text=cinza] at (\x,0.55) {item 1};
+  }
+  \draw[chaveta] (-0.36,-0.45) -- (3.4,-0.45) node[midway, below=5pt, font=\scriptsize, align=center] {bloco 1: \textbf{ordem}\\dos itens};
+  \draw[chaveta] (4.04,-0.45) -- (7.8,-0.45) node[midway, below=5pt, font=\scriptsize, align=center] {bloco 2: \textbf{para qual caixa}\\o item vai};
+  \draw[chaveta] (8.44,-0.45) -- (12.2,-0.45) node[midway, below=5pt, font=\scriptsize, align=center] {bloco 3: \textbf{regra de posição}\\(BL ou BSSF)};
+\end{tikzpicture}
+\caption{Vetor proposto. Diferente do $3n$ da primeira conversa, o bloco 2 não escolhe entre FF e BF: escolhe
+\emph{diretamente a caixa}.}
+\end{figure}
+
+\paragraph{Como a chave do bloco 2 vira uma caixa.} Com $K$ caixas abertas, a caixa do item é
+$\lfloor r\cdot K\rfloor+1$. Exemplo com $K_0=4$: chave $0{,}81 \Rightarrow \lfloor 0{,}81\times4\rfloor+1 = 4$
+(caixa 4); chave $0{,}07 \Rightarrow$ caixa 1; chave $0{,}44 \Rightarrow$ caixa 2.
+
+\subsection{E se o item não couber na caixa escolhida?}\label{sec:naocabe}
+É a decisão em aberto mais importante: a caixa sorteada pode ter um item em conflito, ou não ter espaço. Para
+manter \textbf{toda solução viável} (a vantagem atual do decodificador), o item precisa de um ``plano B'':
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=4.5mm and 7mm]
+  \node[proc] (a) {Item $i$: a chave escolhe a caixa $k=\lfloor r\cdot K\rfloor+1$};
+  \node[dec, below=of a] (b) {Cabe em $k$ (sem conflito, com espaço)?};
+  \node[ok, right=of b] (c) {coloca em $k$\\ (regra de posição do bloco 3)};
+  \node[dec, below=of b] (d) {Cabe em outra caixa aberta?};
+  \node[ok, right=of d] (e) {coloca na \textbf{mais cheia} que serve (BF)};
+  \node[proc, below=of d] (f) {Abre uma caixa nova ($K\leftarrow K+1$) e coloca o item nela};
+  \draw[seta] (a) -- (b);
+  \draw[seta] (b) -- node[rot]{sim} (c);
+  \draw[seta] (b) -- node[rot, right]{não} (d);
+  \draw[seta] (d) -- node[rot]{sim} (e);
+  \draw[seta] (d) -- node[rot, right]{não} (f);
+\end{tikzpicture}
+\caption{Proposta de ``plano B''. A solução continua sempre viável. No fim, caixas que ficaram vazias não contam.}
+\end{figure}
+
+\noindent Alternativas ao plano B: (a) tentar as caixas seguintes em ordem (FF); (b) aceitar soluções inviáveis e
+penalizar na nota. A (b) é a menos recomendada, porque faz a metaheurística gastar tempo com soluções que não servem.
+\textbf{Inclinação:} o fluxo da figura (BF como plano B, depois caixa nova).
+
+\paragraph{Caixas vazias.} Como $K_0$ caixas são abertas no início, algumas podem terminar vazias, se nenhuma chave as
+escolher. Elas simplesmente não contam no número de caixas; a nota (caixas + desempate) continua a mesma.
+
+% =====================================================================
+\section{Fixar a ordem de inserção}
+% =====================================================================
+Em vez de a metaheurística escolher a ordem dos itens (bloco 1), a ordem é \textbf{fixada por uma regra}, e o vetor
+fica só com os blocos 2 e 3 ($2n$ chaves):
+
+\begin{center}\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{5.6cm}>{\raggedright\arraybackslash}p{6.4cm}@{}}
+\toprule
+& ordem livre (bloco 1) & ordem fixa \\ \midrule
+Tamanho do vetor & $3n$ (75 chaves) & $2n$ (50 chaves) \\
+Quem decide a ordem & a metaheurística & uma regra fixa (ex.: área decrescente) \\
+Vantagem & pode achar ordens melhores que qualquer regra & espaço de busca menor; a metaheurística se concentra em
+caixa e posição \\
+Risco & busca maior, mais lenta para convergir & se a regra for ruim para uma instância, a metaheurística não consegue
+corrigir \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Regras de ordem candidatas, todas já usadas no projeto: \textbf{área decrescente}, \textbf{grau de conflito
+decrescente} (a ordem ``Oc'' do artigo-base, usada no modelo exato) e \textbf{altura decrescente}. Itens grandes ou com
+muitos conflitos são os mais difíceis de encaixar, por isso tendem a ir primeiro.
+
+\quadro{cinza}{A confirmar:}{na conversa apareceu ``ordem de inserção das caixas''. A leitura adotada aqui é a
+\textbf{ordem dos itens} (na literatura de empacotamento, os itens às vezes são chamados de ``caixas'' e os
+contêineres de ``bins''). Se o professor quis dizer a ordem em que os \emph{contêineres} são testados, a mudança é
+outra.}
+
+% =====================================================================
+\section{Comparar BRKGAs}
+% =====================================================================
+O decodificador é uma função ``vetor de chaves $\to$ nota''. Por isso, o mesmo decodificador pode ser ligado a
+implementações diferentes de BRKGA, e comparar essas implementações vira um experimento a mais.
+
+\begin{center}\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{7.8cm}@{}}
+\toprule
+Implementação & Situação & Características \\ \midrule
+BRKGA do RKO (v2.0.1) & \textbf{já em uso} & cruzamento viciado + busca local Nelder-Mead com o pool; parâmetros fixos
+  ou por Q-Learning \\
+BRKGA-CS do RKO & já disponível (só configurar) & BRKGA com \emph{cluster search}; vem no mesmo arcabouço \\
+\texttt{brkgaAPI} (Toso e Resende, 2015) & a obter & a implementação ``clássica'' em C++, sem busca local \\
+BRKGA-MP-IPR (Andrade et al., 2021) & a obter & vários pais no cruzamento e \emph{path relinking} implícito \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent As duas primeiras são de graça: já estão no RKO e o decodificador já funciona com elas. As duas últimas
+exigem baixar a biblioteca e escrever um pequeno adaptador para o decodificador. \textbf{Antes de usar, confirmar
+versão e licença de cada uma.} Para a comparação ser justa, todas devem usar o mesmo decodificador, o mesmo critério de
+parada e as mesmas condições de execução (um núcleo por execução).
+
+% =====================================================================
+\section{Resumo: as representações em jogo}
+% =====================================================================
+\begin{center}\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.9cm}c>{\raggedright\arraybackslash}p{5.2cm}>{\raggedright\arraybackslash}p{4.6cm}@{}}
+\toprule
+Representação & Chaves & O que a metaheurística decide & Situação \\ \midrule
+$n$ (padrão atual) & 25 & ordem & implementada e testada \\
+$2n$, FF/BF por item & 50 & ordem + FF ou BF & implementada; empatou com $n$ \\
+$2n$ com 4 faixas & 50 & ordem + combinação caixa/posição & proposta (1ª conversa) \\
+$3n$ (regra por regra) & 75 & ordem + FF/BF + BL/BSSF & proposta (1ª conversa) \\
+\textbf{$3n$ com $K_0$ caixas} & 75 & ordem + \textbf{qual caixa} + posição & \textbf{proposta desta conversa} \\
+\textbf{ordem fixa} & 50 & qual caixa + posição & \textbf{proposta desta conversa} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Todas mudam \textbf{só o decodificador}: o código do RKO não é alterado (ele só usa o tamanho do vetor).
+Nas 64 instâncias atuais, todas devem achar o mesmo número de caixas (a versão $n$ já acerta 100\%); as diferenças
+devem aparecer no tempo até a melhor solução, nas curvas de convergência e nas instâncias maiores.
+
+% =====================================================================
+\section{Pontos a confirmar com o professor}
+% =====================================================================
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+\item $K_0$: é ``área total / área da caixa''? E vale usar o LB completo (área e maior clique), que acerta mais?
+\item ``Ordem de inserção das caixas'': é a ordem dos \emph{itens}?
+\item Se o item não cabe na caixa escolhida: o plano B da Seção~\ref{sec:naocabe} (BF entre as abertas, depois caixa
+  nova) está de acordo?
+\item Quais BRKGAs ele recomenda comparar?
+\end{enumerate}
+
+% =====================================================================
+\section{Próximos passos}
+% =====================================================================
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+\item Implementar o decodificador ``$3n$ com $K_0$ caixas'' (ordem + qual caixa + posição), com o plano B.
+\item Implementar a variante de ordem fixa (área decrescente e grau de conflito decrescente).
+\item Registrar cada melhora nas execuções, para as curvas de convergência (pedido da primeira conversa).
+\item Comparar as representações com o mesmo protocolo: núcleos fixos, mais sementes, tempo suficiente.
+\item Comparar BRKGAs: primeiro os dois do RKO; depois \texttt{brkgaAPI} e BRKGA-MP-IPR, se houver tempo.
+\end{enumerate}
+
+\end{document}

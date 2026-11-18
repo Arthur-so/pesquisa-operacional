@@ -1,0 +1,385 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[brazil]{babel}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,array,makecell}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,calc,decorations.pathreplacing}
+\usepackage[hidelinks]{hyperref}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+
+\definecolor{azul}{HTML}{2A78D6}
+\definecolor{laranja}{HTML}{EB6834}
+\definecolor{verde}{HTML}{1BAF7A}
+\definecolor{amarelo}{HTML}{EDA100}
+\definecolor{roxo}{HTML}{7C3AED}
+\definecolor{vermelho}{HTML}{B3261E}
+\definecolor{cinza}{HTML}{6B6A64}
+
+\newcommand{\quadro}[3]{\begin{center}\fcolorbox{#1}{#1!6}{\begin{minipage}{0.95\textwidth}\small
+\textbf{#2}\ #3\end{minipage}}\end{center}}
+
+\tikzset{
+  chave/.style={draw=black!60, minimum width=7mm, minimum height=7mm, font=\scriptsize, inner sep=0pt},
+  seta/.style={-{Stealth[length=2.2mm]}, thick, draw=black!70},
+  chaveta/.style={decorate, decoration={brace, amplitude=4pt, mirror}, thick, draw=black!60},
+}
+
+\title{\textbf{Retorno do professor e próximos passos}\\[2pt]\large Projeto 2BPPC --- metaheurística e método exato}
+\author{Arthur Santos de Oliveira --- Pesquisa Operacional, UNIFESP--ICT}
+\date{novembro de 2026}
+
+\begin{document}
+\maketitle
+
+% =====================================================================
+\section{O que o professor disse}
+% =====================================================================
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+\item \textbf{Representação:} usar um vetor de \textbf{$2n$ chaves}, separado em partes: a primeira parte dá a
+  ordem dos itens; a segunda, as regras a serem usadas.
+\item \textbf{Parada:} a critério do aluno; cuidado para \textbf{não parar antes de convergir}; pode esperar o
+  tempo máximo.
+\item \textbf{Bottom-Left} é uma boa regra de posicionamento.
+\item Usar o Bottom-Left para ter um \textbf{limite} mais preciso (ver a Seção~\ref{sec:limite}: é preciso
+  esclarecer se é limite inferior ou superior).
+\item Pode usar \textbf{dados sintéticos}.
+\item \textbf{Python + AMPL} é aceito.
+\item Procurar a \textbf{caixa mais preenchida} costuma ser melhor do que o Bottom-Left (ver a
+  Seção~\ref{sec:bf}: as duas regras decidem coisas diferentes).
+\item O aluno deve \textbf{rodar o código ele mesmo} e conferir os tempos.
+\item \textbf{Gráfico de convergência}: citado pelo professor ao responder dúvidas de outros alunos (ver a
+  Seção~\ref{sec:parada}).
+\end{enumerate}
+
+% =====================================================================
+\section{A representação com $2n$ chaves}
+% =====================================================================
+\subsection{O que é}
+Cada item tem \textbf{duas} chaves (números em $[0,1)$). Com $n=25$ itens, o vetor tem 50 posições:
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+  % vetor n
+  \node[anchor=east, font=\small] at (-0.3,1.6) {\textbf{$n$ chaves}};
+  \foreach \i/\v in {1/{0,72},2/{0,15},3/{0,93},4/{0,41}} {
+    \node[chave, fill=azul!15] at ({(\i-1)*0.72},1.6) {\v};
+  }
+  \node[font=\small] at (3.25,1.6) {$\cdots$};
+  \node[chave, fill=azul!15] at (4.0,1.6) {0,58};
+  \draw[chaveta] (-0.36,1.15) -- (4.36,1.15) node[midway, below=5pt, font=\scriptsize] {ordem dos itens (25 chaves)};
+  % vetor 2n
+  \node[anchor=east, font=\small] at (-0.3,-0.4) {\textbf{$2n$ chaves}};
+  \foreach \i/\v in {1/{0,72},2/{0,15},3/{0,93},4/{0,41}} {
+    \node[chave, fill=azul!15] at ({(\i-1)*0.72},-0.4) {\v};
+  }
+  \node[font=\small] at (3.25,-0.4) {$\cdots$};
+  \node[chave, fill=azul!15] at (4.0,-0.4) {0,58};
+  \foreach \i/\v in {1/{0,31},2/{0,88},3/{0,07},4/{0,62}} {
+    \node[chave, fill=laranja!18] at ({4.9+(\i-1)*0.72},-0.4) {\v};
+  }
+  \node[font=\small] at (8.15,-0.4) {$\cdots$};
+  \node[chave, fill=laranja!18] at (8.9,-0.4) {0,49};
+  \draw[chaveta] (-0.36,-0.85) -- (4.36,-0.85) node[midway, below=5pt, font=\scriptsize] {parte 1: ordem dos itens};
+  \draw[chaveta] (4.54,-0.85) -- (9.26,-0.85) node[midway, below=5pt, font=\scriptsize] {parte 2: regra de cada item};
+  \node[font=\scriptsize, text=cinza] at (0,0.12) {item 1};
+  \node[font=\scriptsize, text=cinza] at (4.9,0.12) {item 1};
+  \node[font=\scriptsize, text=cinza] at (0,2.12) {item 1};
+\end{tikzpicture}
+\caption{Com $n$ chaves, o vetor só diz a ordem; a regra é a mesma para todos os itens. Com $2n$, a segunda
+metade diz, item por item, qual regra usar ao colocá-lo.}
+\end{figure}
+
+\subsection{Como está o projeto hoje}
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item \textbf{A versão $2n$ já está implementada}, mas \textbf{não é o padrão}. O padrão atual usa $n$ chaves, com a
+  mesma regra para todos (primeira caixa que serve + Bottom-Left).
+\item Na versão $2n$ atual (opção \texttt{--escolha chave}), a segunda parte escolhe só entre
+  \textbf{duas} regras de caixa: chave $<0{,}5\Rightarrow$ FF (primeira caixa que serve); chave $\ge0{,}5\Rightarrow$
+  BF (caixa mais cheia). Código: \texttt{meta/src/Problem\_2BPPC.h}, linhas 102 (tamanho do vetor) e 185 (leitura
+  da regra).
+\item \textbf{Por que não virou o padrão:} no teste, $2n$ não melhorou nenhuma instância. Mas o teste era
+  desfavorável a ela: FF e BF \textbf{empatam} neste problema, então escolher entre as duas não tem como ajudar.
+\end{itemize}
+
+\subsection{Proposta: regras que façam diferença}
+A chave da segunda parte passa a escolher entre \textbf{4 combinações} de regra de caixa e de posicionamento,
+dividindo $[0,1)$ em quatro faixas:
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[x=3.4cm]
+  \foreach \a/\b/\r/\c in {0/0.25/{FF + BL}/verde, 0.25/0.5/{FF + BSSF}/azul, 0.5/0.75/{BF + BL}/laranja, 0.75/1/{BF + BSSF}/roxo} {
+    \fill[\c!22] (\a*4,0) rectangle (\b*4,0.7);
+    \draw[black!60] (\a*4,0) rectangle (\b*4,0.7);
+    \node[font=\small] at ({(\a+\b)*2},0.35) {\r};
+  }
+  \foreach \x/\l in {0/0, 1/{0,25}, 2/{0,5}, 3/{0,75}, 4/1} {
+    \draw[black!60] (\x,0) -- (\x,-0.12) node[below, font=\scriptsize] {\l};
+  }
+  \draw[seta, vermelho] (2.48,1.25) node[above, font=\scriptsize, text=vermelho]
+       {exemplo: chave do item $=0{,}62$} -- (2.48,0.72);
+\end{tikzpicture}
+\caption{Proposta para a parte 2. No exemplo, a chave 0,62 cai na terceira faixa: o item usa BF + BL.
+FF/BF $=$ primeira caixa que serve / caixa mais cheia; BL/BSSF $=$ posição mais baixa e à esquerda / encaixe mais justo.}
+\end{figure}
+
+Assim, a metaheurística pode aprender, por exemplo, a usar o encaixe mais justo só nos itens pequenos que tapam
+buracos. Depois, comparar $n\times2n\times3n$ (Seção~\ref{sec:3n}) com o protocolo correto: cada execução num
+núcleo fixo, mais sementes e tempo suficiente para convergir.
+
+\subsection{Alternativa: $3n$ chaves (uma chave para cada regra)}\label{sec:3n}
+Em vez de uma chave escolher a \emph{combinação}, cada regra ganha \textbf{a sua própria chave}. Cada item passa a ter
+3 chaves; com $n=25$ itens, o vetor tem $3\times25=75$ posições, em três blocos:
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+  \foreach \bl/\x/\cor/\vals in {1/0/azul/{{0,72},{0,15},{0,93}}, 2/4.4/laranja/{{0,31},{0,88},{0,07}}, 3/8.8/verde/{{0,64},{0,22},{0,51}}} {
+    \foreach \v [count=\k] in \vals {
+      \node[chave, fill=\cor!18] at ({\x+(\k-1)*0.72},0) {\v};
+    }
+    \node[font=\small] at ({\x+2.35},0) {$\cdots$};
+    \node[font=\scriptsize, text=cinza] at (\x,0.55) {item 1};
+  }
+  \draw[chaveta] (-0.36,-0.45) -- (3.4,-0.45) node[midway, below=5pt, font=\scriptsize, align=center] {bloco 1: \textbf{ordem}\\chaves 1--25};
+  \draw[chaveta] (4.04,-0.45) -- (7.8,-0.45) node[midway, below=5pt, font=\scriptsize, align=center] {bloco 2: \textbf{regra de caixa}\\chaves 26--50};
+  \draw[chaveta] (8.44,-0.45) -- (12.2,-0.45) node[midway, below=5pt, font=\scriptsize, align=center] {bloco 3: \textbf{regra de posição}\\chaves 51--75};
+\end{tikzpicture}
+\caption{Vetor $3n$. O item 1 usa a chave 1 (posição na ordem), a chave 26 (regra de caixa) e a chave 51 (regra de
+posição). Em cada bloco de regras: chave $<0{,}5$ escolhe a primeira opção; $\ge0{,}5$, a segunda.}
+\end{figure}
+
+\begin{center}\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Bloco & chave $<0{,}5$ & chave $\ge0{,}5$ \\ \midrule
+2: regra de caixa & FF (primeira caixa que serve) & BF (caixa mais cheia) \\
+3: regra de posição & BL (mais baixo, à esquerda) & BSSF (encaixe mais justo) \\
+\bottomrule
+\end{tabular}
+\end{center}
+No exemplo da figura, o item 1 tem chave de caixa 0,31 (FF) e chave de posição 0,64 (BSSF): usa \textbf{FF + BSSF}.
+
+\paragraph{O que muda em relação ao $2n$ com 4 faixas.} O que dá para representar é \textbf{igual}: nas duas versões,
+cada item pode receber qualquer uma das 4 combinações. A diferença está no \textbf{caminho} entre elas, isto é, em
+quais combinações ficam a um passo pequeno de distância:
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[comb/.style={draw=black!60, rounded corners=2pt, font=\scriptsize, minimum width=1.55cm,
+                    minimum height=6mm, fill=white}]
+  % fila (2n com 4 faixas)
+  \node[font=\small\bfseries] at (3.15,1.3) {$2n$ com 4 faixas: uma fila};
+  \node[comb] (a) at (0,0.5) {FF+BL};
+  \node[comb] (b) at (2.1,0.5) {FF+BSSF};
+  \node[comb] (c) at (4.2,0.5) {BF+BL};
+  \node[comb] (d) at (6.3,0.5) {BF+BSSF};
+  \draw[thick, black!60] (a) -- (b) -- (c) -- (d);
+  \node[font=\scriptsize, text=cinza, text width=6.8cm, align=center] at (3.15,-0.35)
+       {cada combinação só é vizinha das que estão ao lado; de FF+BL a BF+BL é preciso passar por FF+BSSF};
+  % quadrado (3n)
+  \node[font=\small\bfseries] at (10.6,1.3) {$3n$: um quadrado};
+  \node[comb] (e) at (9.3,0.5) {FF+BL};
+  \node[comb] (f) at (11.9,0.5) {BF+BL};
+  \node[comb] (g) at (9.3,-0.9) {FF+BSSF};
+  \node[comb] (h) at (11.9,-0.9) {BF+BSSF};
+  \draw[thick, laranja] (e) -- node[above=1pt, font=\tiny, text=laranja!80!black] {troca a caixa} (f);
+  \draw[thick, laranja] (g) -- node[below=1pt, font=\tiny, text=laranja!80!black] {troca a caixa} (h);
+  \draw[thick, verde] (e) -- node[left=1pt, font=\tiny, text=verde!70!black, align=right] {troca a\\posição} (g);
+  \draw[thick, verde] (f) -- node[right=1pt, font=\tiny, text=verde!70!black, align=left] {troca a\\posição} (h);
+  \node[font=\scriptsize, text=cinza, text width=5.4cm, align=center] at (10.6,-1.75)
+       {cada combinação é vizinha das duas que diferem em \textbf{uma} regra só};
+\end{tikzpicture}
+\caption{Vizinhança entre as combinações. No $2n$ com 4 faixas, um passo pequeno na chave (ex.: de 0,49 para 0,51)
+pode trocar as \emph{duas} regras de uma vez (FF+BSSF $\to$ BF+BL). No $3n$, cada regra muda sem afetar a outra.}
+\end{figure}
+
+\paragraph{No cruzamento do BRKGA.} O filho herda \emph{chave por chave} de um dos pais. Exemplo para um item: o pai A usa
+FF+BSSF e o pai B usa BF+BL.
+\begin{center}\small
+\begin{tabular}{@{}lp{9.6cm}@{}}
+\toprule
+Representação & O filho pode receber \\ \midrule
+$2n$ com 4 faixas & FF+BSSF \textbf{ou} BF+BL: a combinação inteira de um dos pais \\
+$3n$ & essas duas \textbf{e também} FF+BL ou BF+BSSF: a regra de caixa de um pai com a de posição do outro \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Impacto no RKO.} \textbf{Nenhuma alteração no código do RKO.} Ele não sabe o que as chaves significam; só usa
+o tamanho do vetor (\texttt{data.n}), de forma genérica, em todas as metaheurísticas. As mudanças ficam só no código
+do projeto:
+\begin{enumerate}[leftmargin=*,itemsep=0pt]
+\item \texttt{ReadData} (\texttt{meta/src/Problem\_2BPPC.h}): informar que o vetor tem $3n$ chaves (\texttt{data.n = 3*n});
+\item \texttt{Decodifica} (mesmo arquivo): ler os três blocos;
+\item \texttt{rko\_bppc.cpp} e \texttt{experimentos.py}: uma opção para ligar o modo $3n$.
+\end{enumerate}
+O impacto indireto é de desempenho: o espaço de busca fica maior (75 chaves contra 25 ou 50), e algumas buscas locais
+do RKO percorrem todas as chaves, então cada passo delas fica mais caro.
+
+\paragraph{Vai dar resultado diferente?} Nas 64 instâncias atuais, o número de caixas provavelmente será o mesmo: a
+versão com $n$ chaves já acha o ótimo em 100\% das execuções. A diferença, se houver, deve aparecer no tempo até a
+melhor solução, nas curvas de convergência e nas instâncias maiores. Se o $3n$ é melhor que o $2n$ é uma
+\textbf{hipótese}: as regras independentes podem deixar a busca mais organizada, ou o vetor maior pode atrapalhar.
+Só o teste $n\times2n\times3n$ responde.
+
+% =====================================================================
+\section{Critério de parada e gráfico de convergência}\label{sec:parada}
+% =====================================================================
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item \textbf{Orientação:} parar por tempo máximo é aceito, desde que a busca já tenha \textbf{convergido}, isto é,
+  que a melhor solução tenha parado de melhorar bem antes do fim.
+\item \textbf{Situação atual:} limite de 1\,s. Na média, a melhor solução aparece em 0,05\,s; mas a execução mais
+  lenta só achou a melhor solução aos \textbf{0,83\,s}, perto demais do limite. Não dá para garantir que
+  convergiu.
+\item \textbf{Proposta:}
+  \begin{enumerate}[itemsep=0pt]
+  \item aumentar o tempo máximo (ex.: 10\,s);
+  \item mostrar \textbf{curvas de convergência} (melhor solução $\times$ tempo) para confirmar que tudo estabiliza bem
+    antes do limite. É o gráfico que o professor citou nas dúvidas de outros alunos, e um dos pedidos em aula;
+  \item manter cada execução fixada num núcleo rápido, porque o limite é de tempo de relógio e a carga da máquina
+    muda o resultado.
+  \end{enumerate}
+\end{itemize}
+
+\paragraph{O que é o gráfico de convergência.} Para cada execução, o eixo $x$ é o tempo e o eixo $y$ é o valor da
+melhor solução encontrada até aquele instante. A curva só desce (ou fica parada) e mostra \textbf{quando a busca
+estabiliza}. Com várias sementes, desenha-se a média (ou a mediana) com uma faixa de variação. Se a curva fica
+plana bem antes do tempo máximo, a busca convergiu; se ainda desce perto do fim, o tempo foi curto.
+
+\begin{center}
+\begin{tikzpicture}[x=1.1cm, y=0.9cm]
+  \draw[-{Stealth[length=2mm]}, black!60] (0,0) -- (6.3,0) node[right, font=\scriptsize] {tempo (s)};
+  \draw[-{Stealth[length=2mm]}, black!60] (0,0) -- (0,3.3) node[above, font=\scriptsize] {melhor solução};
+  \draw[azul, very thick] (0,3) -- (0.3,3) -- (0.3,2.2) -- (0.8,2.2) -- (0.8,1.6) -- (1.5,1.6) -- (1.5,1.0) -- (6,1.0);
+  \draw[dashed, cinza] (6,0) -- (6,3.1) node[above, font=\scriptsize, text=cinza] {tempo máximo};
+  \draw[vermelho, thick, -{Stealth[length=2mm]}] (3.6,2.2) node[above, font=\scriptsize, text=vermelho]
+       {estabilizou: convergiu} -- (2.6,1.08);
+\end{tikzpicture}
+\end{center}
+
+\paragraph{O que falta para gerar.} Hoje cada execução registra só a melhor solução final e o instante em que
+ela apareceu. Para desenhar a curva, o decodificador precisa \textbf{registrar cada melhora} (instante e valor) e
+gravar essa lista junto com o resultado. É uma mudança pequena, só no código do projeto (não no RKO).
+
+% =====================================================================
+\section{Bottom-Left}
+% =====================================================================
+Já é a regra de posicionamento padrão. Nos testes, foi igual ou melhor que a alternativa (BSSF). Nada a mudar.
+
+% =====================================================================
+\section{``Caixa mais preenchida é melhor que Bottom-Left''}\label{sec:bf}
+% =====================================================================
+As duas regras \textbf{não competem}: decidem coisas diferentes, em momentos diferentes.
+
+\begin{center}\small
+\begin{tabular}{@{}p{3.4cm}p{6cm}p{6.2cm}@{}}
+\toprule
+& \textbf{Caixa mais preenchida (BF)} & \textbf{Bottom-Left (BL)} \\ \midrule
+Decide & \textbf{em qual caixa} o item vai & \textbf{em que posição}, dentro da caixa já escolhida \\
+Alternativa & FF: a primeira caixa que serve & BSSF: o espaço de encaixe mais justo \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item Dá para usar as duas juntas: \textbf{BF + BL}. Essa combinação já existe e foi testada: empatou com FF + BL
+  (100\% das execuções no ótimo nos dois testes).
+\item Provavelmente o professor quis dizer ``BF é melhor que FF'' (a primeira caixa que serve).
+\item \textbf{Proposta:} como FF e BF empataram nos testes, a experiência dele é um bom critério de desempate.
+  Trocar o padrão para \textbf{BF + BL} (opção \texttt{--escolha bf --posic bl}). No vetor $2n$, BF continua entre
+  as regras que a chave pode escolher.
+\end{itemize}
+
+% =====================================================================
+\section{``Usar o Bottom-Left para um limite mais preciso''}\label{sec:limite}
+% =====================================================================
+Aqui há um possível mal-entendido, que vale esclarecer:
+
+\begin{center}\small
+\begin{tabular}{@{}p{2.9cm}p{6.2cm}p{6.6cm}@{}}
+\toprule
+& \textbf{Limite inferior (LB)} & \textbf{Limite superior (UB)} \\ \midrule
+O que diz & ``não dá para usar \emph{menos} que $X$ caixas'' & ``dá para fazer com $X$ caixas'' \\
+Como se obtém & uma \textbf{prova} (conta de área, maior clique, relaxação do modelo) & uma \textbf{solução que funciona}
+  (qualquer heurística) \\
+Bottom-Left serve? & \textbf{não}: uma heurística monta soluções, não prova nada & \textbf{sim}: é exatamente o que ela faz \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Duas leituras possíveis do que o professor quis dizer:
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+\item \textbf{Limite superior}, para reduzir o número de caixas do modelo exato. \textbf{Já é feito}: o guloso que
+  define $K$ (as caixas disponíveis no modelo) usa Bottom-Left e BSSF. Ele já acha o ótimo em 55 das 64 instâncias; em 26 delas, ainda empata com o LB e prova o ótimo sozinho.
+\item \textbf{Um limite inferior mais forte}, por outro método. O artigo-base usa o de Carlier et al.\ (2007), que
+  trata itens largos e altos. Isso ajudaria nas 32 instâncias em que o ótimo é maior que o LB atual.
+\end{enumerate}
+\quadro{azul}{Como perguntar, de forma natural:}{``Professor, o senhor falou de usar o Bottom-Left para o limite:
+seria para o limite superior, para reduzir o número de caixas do modelo?''}
+
+% =====================================================================
+\section{Dados sintéticos}
+% =====================================================================
+Aceito. Proposta: criar \textbf{16 instâncias novas}, maiores, no mesmo formato das 64 (arquivos de dados de entrada):
+4 tipos (I--IV) $\times$ 2 tamanhos ($n=50$ e $n=100$ itens) $\times$ 2 densidades de conflito (7\% e 16\%). As 64 da
+literatura continuam sendo a base do artigo; as novas mostram os métodos em casos em que o exato não resolve tudo
+rápido.
+
+\quadro{cinza}{Não confundir}{com a pasta \texttt{instancias\_geradas/}: lá estão só a 01 reconstruída e as 53--64,
+que faltavam no zip e foram refeitas pela regra do artigo-base. Elas não são instâncias novas.}
+
+% =====================================================================
+\section{Python + AMPL}
+% =====================================================================
+Aceito. O método exato continua como está: modelo e laço de cortes em AMPL; Python para gerar os dados de entrada,
+rodar as 64 instâncias e conferir as soluções.
+
+% =====================================================================
+\section{Rodar o código e conferir os tempos}
+% =====================================================================
+O \texttt{README.md} do projeto tem um passo a passo, com os comandos testados e a saída esperada de cada um:
+preparar o ambiente; rodar o exato numa instância ou nas 64 (cerca de 3 minutos); comparar os tempos com os
+oficiais (\texttt{scripts/comparar\_tempos.py}); rodar a metaheurística uma vez ou em lote; e ler os resultados.
+Cada execução sua vai para uma pasta própria (opção \texttt{--pasta}), sem sobrescrever os resultados oficiais.
+Os tempos mudam com a máquina; os ótimos não podem mudar.
+
+% =====================================================================
+\section{Resumo e próximos passos}
+% =====================================================================
+\begin{center}\small
+\begin{tabular}{@{}p{4.3cm}p{5.2cm}p{6.2cm}@{}}
+\toprule
+Orientação & Situação & Ação \\ \midrule
+Vetor $2n$ (ordem + regras) & implementado como variante, só FF/BF & ampliar para 4 regras e comparar com $n$ \\
+Não parar antes de convergir & 1\,s; pior caso achou aos 0,83\,s & tempo maior (ex.: 10\,s) \\
+Gráfico de convergência & ainda não existe & registrar cada melhora e desenhar as curvas \\
+Bottom-Left & já é o padrão & nada \\
+Caixa mais preenchida (BF) & existe; empatou com FF & trocar o padrão para BF + BL \\
+BL para um limite & BL já dá o UB do modelo & esclarecer se era LB ou UB \\
+Dados sintéticos & não existem ainda & gerar 16 instâncias maiores \\
+Python + AMPL & é o que está feito & nada \\
+Rodar o código sozinho & passo a passo no \texttt{README.md} & rodar e conferir os tempos \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Ordem proposta.}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+\item Registrar as respostas do professor em \texttt{docs/duvidas\_professor.md} e no documento de fluxo.
+\item Trocar o padrão para BF + BL.
+\item Ampliar a parte 2 do vetor $2n$ (4 combinações de regras) e comparar $n\times2n$ com o protocolo correto.
+\item Registrar cada melhora nas execuções, rodar com tempo maior e gerar as curvas de convergência.
+\item Gerar as 16 instâncias sintéticas e rodar os dois métodos nelas.
+\end{enumerate}
+
+\end{document}

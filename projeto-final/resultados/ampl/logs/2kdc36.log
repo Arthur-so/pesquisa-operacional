@@ -1,0 +1,83 @@
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.999926
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9839710000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9645
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9563560000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9459750000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.93336
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9212600000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.913153
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9041950000001
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.8757820000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8479560000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.819148
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.791498
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7639429999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.5314010000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.3828349999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.2449529999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.221168
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.155675
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.134622
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.12554
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.1133789999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.1034439999999
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.0795840000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.0576729999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.0337570000002
+2kdc36: status=otimo caixas=4 LB=4 UB_heur=4 tempo=1.00s iter=3 cortes=3 opp=31 t_opp=0.91s
+CORTE 9 21 25
+CORTE 4 19 1
+CORTE 23 21 6 25 24 3
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+presolve: constraint Abaixo[10,16] cannot hold:
+	body <= -13 cannot be >= -8; difference = -5
+presolve: constraint Abaixo[10,16] cannot hold:
+	body <= -13 cannot be >= -8; difference = -5
+presolve: constraint Abaixo[10,16] cannot hold:
+	body <= -13 cannot be >= -8; difference = -5
+presolve: constraint Abaixo[10,16] cannot hold:
+	body <= -13 cannot be >= -8; difference = -5
+presolve: constraint Abaixo[5,18] cannot hold:
+	body <= -21 cannot be >= -12; difference = -9
+presolve: constraint Abaixo[5,18] cannot hold:
+	body <= -21 cannot be >= -12; difference = -9
+presolve: constraint Abaixo[5,18] cannot hold:
+	body <= -21 cannot be >= -12; difference = -9
+presolve: constraint Abaixo[5,18] cannot hold:
+	body <= -21 cannot be >= -12; difference = -9

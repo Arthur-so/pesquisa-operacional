@@ -1,0 +1,85 @@
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.9999349999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9795840000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9700910000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.958572
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.945678
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.930668
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9158480000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9042439999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.895458
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8851169999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8768439999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8685500000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8323190000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8149979999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8068709999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7970249999998
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.7857039999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.772453
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7583549999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7307500000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7072899999998
+2kdc12: status=otimo caixas=4 LB=4 UB_heur=4 tempo=0.32s iter=2 cortes=3 opp=26 t_opp=0.28s
+CORTE 22 15 6 8
+CORTE 17 19 3
+CORTE 18 11 25 21
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+presolve: constraint Esquerda[12,1] cannot hold:
+	body <= -6 cannot be >= -5; difference = -1
+presolve: constraint Esquerda[12,14] cannot hold:
+	body <= -6 cannot be >= -2; difference = -4
+presolve: constraint Esquerda[12,1] cannot hold:
+	body <= -6 cannot be >= 2; difference = -8
+presolve: constraint Esquerda[12,14] cannot hold:
+	body <= -6 cannot be >= 5; difference = -11
+presolve: constraint Esquerda[12,1] cannot hold:
+	body <= -6 cannot be >= -5; difference = -1
+presolve: constraint Esquerda[12,14] cannot hold:
+	body <= -6 cannot be >= -2; difference = -4
+presolve: constraint Esquerda[12,1] cannot hold:
+	body <= -6 cannot be >= 2; difference = -8
+presolve: constraint Esquerda[12,14] cannot hold:
+	body <= -6 cannot be >= 5; difference = -11
+presolve: constraint Esquerda[12,1] cannot hold:
+	body <= -6 cannot be >= -5; difference = -1
+presolve: constraint Esquerda[12,1] cannot hold:
+	body <= -6 cannot be >= 2; difference = -8
+presolve, variable y[21]:
+	impossible deduced bounds: lower = 22, upper = 19;
+	difference = 3
+presolve, variable y[21]:
+	impossible deduced bounds: lower = 22, upper = 19;
+	difference = 3
+presolve, variable y[21]:
+	impossible deduced bounds: lower = 22, upper = 19;
+	difference = 3

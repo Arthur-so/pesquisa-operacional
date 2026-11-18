@@ -1,0 +1,128 @@
+# =====================================================================
+#  Laço de cortes (Benders combinatório) para o 2BPPC
+#
+#  Uso interativo (de dentro da pasta ampl/):
+#     model bppc.mod; data dat/2kdc50.dat; include bppc.run;
+#  Uso em lote: ampl/rodar_ampl.py (define tlim, arq_sol, arq_csv, dir_ampl)
+#
+#  Fluxo:
+#   1. resolve o mestre (sem a geometria, só com os cortes já conhecidos);
+#   2. para cada caixa usada, testa se os itens cabem (testa_grupo.run);
+#   3. se uma caixa não cabe, reduz o grupo (tira itens enquanto continuar
+#      não cabendo) e proíbe o grupo reduzido em TODAS as caixas (5);
+#   4. repete até todas as caixas caberem -> solução ótima.
+# =====================================================================
+
+# Cada "problem" tem seu próprio ambiente de opções: definir o solver em ambos.
+problem OPP;    option solver highs; option solver_msg 0;
+problem Mestre; option solver highs; option solver_msg 0;
+option solver_msg 0;
+option show_stats 0;
+suffix bestbound OUT;               # limitante dual do HiGHS (se estourar o tempo)
+
+param t_inicio;
+param decorrido default 0;
+param status symbolic default 'executando';
+param z_mestre default 0;
+param z_lb default 0;                 # melhor limitante inferior conhecido
+param iter default 0;
+param n_opp default 0;                # 2D-OPPs resolvidos pelo solver
+param t_opp default 0;                # tempo gasto nesses 2D-OPPs
+param t_antes;
+param cod;
+param cabe;
+param novos;
+set VIAVEIS default {};               # cache: grupos que cabem
+set INVIAVEIS default {};             # cache: grupos que não cabem
+set S within I default {};            # grupo inviável sendo reduzido
+param PX {I} default 0;               # coordenadas inteiras finais
+param PY {I} default 0;
+
+let t_inicio := (_ampl_elapsed_time + _total_solve_elapsed_time);
+let z_lb := LB;
+
+repeat {
+    let iter := iter + 1;
+    let decorrido := (_ampl_elapsed_time + _total_solve_elapsed_time) - t_inicio;
+    if decorrido >= tlim then { let status := 'tempo'; break; }
+
+    # ---------- 1. mestre ----------
+    problem Mestre;
+    option highs_options ('outlev=0 mip:bestbound=1 lim:time=' & (tlim - decorrido));
+    solve Mestre;
+    if solve_result_num >= 400 and solve_result_num < 500 then {
+        let z_lb := max(z_lb, ceil(NumCaixas.bestbound - 1e-6));
+        let status := 'tempo'; break;
+    }
+    if solve_result_num >= 100 then { let status := 'erro_mestre'; break; }
+    let z_mestre := round(NumCaixas);
+    let z_lb := max(z_lb, z_mestre);  # mestre relaxado => limitante inferior
+
+    # ---------- 2-3. conferência geométrica ----------
+    problem OPP;
+    let novos := 0;
+    for {k in B: beta[k] > 0.5} {
+        let P := {i in I: alpha[i,k] > 0.5};
+        commands (dir_ampl & '/testa_grupo.run');
+        if cabe = -1 then { let status := 'tempo'; break; }
+        if cabe = 0 then {
+            let S := P;
+            for {rr in 1..n} {
+                if ordem_rem[rr] in S and card(S) > 2 then {
+                    let P := S diff {ordem_rem[rr]};
+                    commands (dir_ampl & '/testa_grupo.run');
+                    if cabe = -1 then break;
+                    if cabe = 0 then let S := P;   # continua não cabendo: remove
+                }
+            }
+            if cabe = -1 then { let status := 'tempo'; break; }
+            let ncortes := ncortes + 1;
+            let CORTE[ncortes] := S;
+            let novos := novos + 1;
+        }
+    }
+    if status = 'tempo' then break;
+    if novos = 0 then { let status := 'otimo'; break; }
+}
+let decorrido := (_ampl_elapsed_time + _total_solve_elapsed_time) - t_inicio;
+
+# ---------- saída ----------
+printf "%s: status=%s caixas=%d LB=%d UB_heur=%d tempo=%.2fs iter=%d cortes=%d opp=%d t_opp=%.2fs\n",
+    nome, status, (if status = 'otimo' then z_mestre else UB), z_lb, UB,
+    decorrido, iter, ncortes, n_opp, t_opp;
+printf "%s;%s;%d;%d;%d;%.3f;%d;%d;%d;%.3f\n",
+    nome, status, (if status = 'otimo' then z_mestre else UB), z_lb, UB,
+    decorrido, iter, ncortes, n_opp, t_opp >> (arq_csv);
+close (arq_csv);
+
+# Cortes gerados (numeração original dos itens), para auditoria externa.
+for {c in 1..ncortes} {
+    printf "CORTE";
+    printf {i in CORTE[c]} " %d", orig[i];
+    printf "\n";
+}
+
+if status = 'otimo' then {
+    # Reconstrói as posições de cada caixa (o cache guarda só sim/não).
+    printf "# %s otimo=%d tempo=%.2f (AMPL+HiGHS, laco de cortes)\n",
+        nome, z_mestre, decorrido > (arq_sol);
+    problem OPP;
+    option highs_options 'outlev=0 lim:time=600';
+    for {k in B: beta[k] > 0.5} {
+        let P := {i in I: alpha[i,k] > 0.5};
+        if card(P) = 1 then {
+            let {i in P} PX[i] := 0; let {i in P} PY[i] := 0;
+        } else {
+            let pivo := min {i in P: w[i]*h[i] = max {j in P} w[j]*h[j]} i;
+            solve OPP;
+            # Coordenadas inteiras: caminho mais longo nas relações escolhidas.
+            let {i in P} PX[i] := 0; let {i in P} PY[i] := 0;
+            for {rep in 1..card(P)} {
+                let {i in P} PX[i] := max(0, max {j in P: j <> i and l[j,i] > 0.5} (PX[j] + w[j]));
+                let {i in P} PY[i] := max(0, max {j in P: j <> i and b[j,i] > 0.5} (PY[j] + h[j]));
+            }
+        }
+        for {i in P} printf "%d %d %d %d\n", orig[i], k, PX[i], PY[i] >> (arq_sol);
+    }
+    close (arq_sol);
+}

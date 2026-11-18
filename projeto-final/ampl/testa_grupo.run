@@ -1,0 +1,31 @@
+# ---------------------------------------------------------------------
+# Testa se o grupo de itens P cabe numa caixa.
+# Saída em `cabe`: 1 = cabe, 0 = não cabe, -1 = desconhecido (tempo).
+# Ordem: casos triviais -> cache -> condições necessárias baratas ->
+#        2D-OPP exato (PLI). Toda resposta é EXATA (nada heurístico).
+# ---------------------------------------------------------------------
+let cod := sum {i in P} 2^(i-1);          # identificador único do grupo
+if card(P) <= 1 then let cabe := 1;
+else if cod in VIAVEIS then let cabe := 1;
+else if cod in INVIAVEIS then let cabe := 0;
+else if sum {i in P} w[i]*h[i] > W*H then {
+    let cabe := 0; let INVIAVEIS := INVIAVEIS union {cod};
+}
+else if sum {i in P: 2*w[i] > W} h[i] > H or sum {i in P: 2*h[i] > H} w[i] > W then {
+    let cabe := 0; let INVIAVEIS := INVIAVEIS union {cod};
+}
+else {
+    let pivo := min {i in P: w[i]*h[i] = max {j in P} w[j]*h[j]} i;
+    let decorrido := (_ampl_elapsed_time + _total_solve_elapsed_time) - t_inicio;
+    option highs_options ('outlev=0 lim:time=' & max(1, tlim - decorrido));
+    let t_antes := _total_solve_elapsed_time;
+    solve OPP;
+    let t_opp := t_opp + _total_solve_elapsed_time - t_antes;
+    let n_opp := n_opp + 1;
+    if solve_result_num < 100 then {
+        let cabe := 1; let VIAVEIS := VIAVEIS union {cod};
+    } else if solve_result_num >= 200 and solve_result_num < 300 then {
+        let cabe := 0; let INVIAVEIS := INVIAVEIS union {cod};
+    } else
+        let cabe := -1;
+}

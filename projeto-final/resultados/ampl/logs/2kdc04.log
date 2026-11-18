@@ -1,0 +1,79 @@
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.9998909999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9802639999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9684910000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.953716
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9417859999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9127410000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9001969999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.885127
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8580579999998
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.8326520000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8033409999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7663980000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7476069999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7240190000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6989659999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6716019999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6432850000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6129799999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.5879570000002
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.560058
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.5357829999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.5113019999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.4730420000001
+2kdc04: status=otimo caixas=4 LB=4 UB_heur=4 tempo=0.54s iter=3 cortes=3 opp=28 t_opp=0.45s
+CORTE 11 4 18
+CORTE 2 20 7 17
+CORTE 11 8 19 4 6
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+presolve, variable x[23]:
+	impossible deduced bounds: lower = 28, upper = 27;
+	difference = 1
+presolve, variable x[23]:
+	impossible deduced bounds: lower = 28, upper = 27;
+	difference = 1
+presolve, variable x[23]:
+	impossible deduced bounds: lower = 28, upper = 27;
+	difference = 1
+presolve, variable x[23]:
+	impossible deduced bounds: lower = 28, upper = 27;
+	difference = 1
+presolve: constraint Abaixo[4,13] cannot hold:
+	body <= -12 cannot be >= -4; difference = -8
+presolve: constraint Abaixo[4,13] cannot hold:
+	body <= -12 cannot be >= -4; difference = -8
+presolve: constraint Abaixo[4,13] cannot hold:
+	body <= -12 cannot be >= -4; difference = -8

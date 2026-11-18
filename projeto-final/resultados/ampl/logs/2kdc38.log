@@ -1,0 +1,136 @@
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.9999349999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9785529999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9602279999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9448339999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9295139999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.917355
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.90904
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8896989999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8757019999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8615500000001
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.8507789999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.828837
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8022219999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.777043
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.748184
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7315589999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.716997
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.7017510000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6767810000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6609020000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6514670000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.637025
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6244649999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6068230000001
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.599463
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.5739010000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.551211
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.535711
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.5107389999998
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.5040210000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.4759600000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.4567520000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.442904
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.428602
+2kdc38: status=otimo caixas=8 LB=8 UB_heur=8 tempo=0.58s iter=5 cortes=4 opp=41 t_opp=0.44s
+CORTE 9 3 11
+CORTE 1 25 11
+CORTE 13 11 18
+CORTE 13 25 11
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+presolve, variable y[8]:
+	impossible deduced bounds: lower = 28, upper = 10;
+	difference = 18
+presolve, variable y[8]:
+	impossible deduced bounds: lower = 28, upper = 10;
+	difference = 18
+presolve: constraint Esquerda[9,12] cannot hold:
+	body <= -22 cannot be >= -21; difference = -1
+presolve: constraint Esquerda[9,13] cannot hold:
+	body <= -22 cannot be >= -21; difference = -1
+presolve: constraint Esquerda[9,14] cannot hold:
+	body <= -22 cannot be >= -20; difference = -2
+presolve: constraint Esquerda[9,12] cannot hold:
+	body <= -22 cannot be >= -21; difference = -1
+presolve: constraint Esquerda[9,13] cannot hold:
+	body <= -22 cannot be >= -21; difference = -1
+presolve: constraint Esquerda[9,13] cannot hold:
+	body <= -22 cannot be >= -21; difference = -1
+presolve: constraint Esquerda[10,6] cannot hold:
+	body <= -22 cannot be >= -21; difference = -1
+presolve: constraint Esquerda[10,14] cannot hold:
+	body <= -22 cannot be >= -20; difference = -2
+presolve: constraint Esquerda[10,19] cannot hold:
+	body <= -22 cannot be >= -21; difference = -1
+presolve: constraint Esquerda[10,14] cannot hold:
+	body <= -22 cannot be >= -20; difference = -2
+presolve: constraint Esquerda[10,19] cannot hold:
+	body <= -22 cannot be >= -21; difference = -1
+presolve: constraint Esquerda[10,19] cannot hold:
+	body <= -22 cannot be >= -21; difference = -1
+presolve: constraint Esquerda[10,6] cannot hold:
+	body <= -22 cannot be >= -21; difference = -1
+presolve: constraint Esquerda[10,13] cannot hold:
+	body <= -22 cannot be >= -21; difference = -1
+presolve: constraint Esquerda[10,14] cannot hold:
+	body <= -22 cannot be >= -20; difference = -2
+presolve: constraint Esquerda[10,13] cannot hold:
+	body <= -22 cannot be >= -21; difference = -1
+presolve: constraint Esquerda[10,14] cannot hold:
+	body <= -22 cannot be >= -20; difference = -2
+presolve: constraint Esquerda[10,13] cannot hold:
+	body <= -22 cannot be >= -21; difference = -1

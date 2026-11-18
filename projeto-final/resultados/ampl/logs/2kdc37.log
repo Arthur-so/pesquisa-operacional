@@ -1,0 +1,223 @@
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.9998909999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8285580000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8095490000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.787863
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.773353
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7640550000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7524910000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7362680000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7224310000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.713174
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.692998
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.6667299999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.1590879999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.143861
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.1308349999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.1170269999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.106914
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.0908920000002
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.0761560000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.8859900000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.8677440000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.8572819999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.8463929999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.8357959999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.8232699999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.7967229999999
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3598.77178
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.8555219999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.8445310000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.8345760000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.8220419999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.8008249999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.7788190000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.7636819999998
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3597.7540549999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.1955750000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.17814
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.1663899999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.153409
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.1381249999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.1241209999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.1059399999999
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3597.0931500000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.2848909999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.2703740000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.2629320000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.2550510000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.2345359999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.2084159999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.1929610000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.1675639999999
+2kdc37: status=otimo caixas=9 LB=9 UB_heur=9 tempo=4.85s iter=6 cortes=8 opp=70 t_opp=0.66s
+CORTE 18 23 4
+CORTE 1 17 9
+CORTE 18 23 9
+CORTE 1 17 4
+CORTE 18 4 9
+CORTE 1 17 8
+CORTE 1 4 11
+CORTE 1 23 11
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+presolve, variable y[15]:
+	impossible deduced bounds: lower = 35, upper = 20;
+	difference = 15
+presolve, variable y[12]:
+	impossible deduced bounds: lower = 35, upper = 22;
+	difference = 13
+presolve, variable y[12]:
+	impossible deduced bounds: lower = 35, upper = 22;
+	difference = 13
+presolve, variable y[23]:
+	impossible deduced bounds: lower = 35, upper = 27;
+	difference = 8
+presolve, variable y[25]:
+	impossible deduced bounds: lower = 35, upper = 29;
+	difference = 6
+presolve, variable y[8]:
+	impossible deduced bounds: lower = 35, upper = 22;
+	difference = 13
+presolve, variable y[23]:
+	impossible deduced bounds: lower = 35, upper = 27;
+	difference = 8
+presolve, variable y[8]:
+	impossible deduced bounds: lower = 35, upper = 22;
+	difference = 13
+presolve, variable y[8]:
+	impossible deduced bounds: lower = 35, upper = 22;
+	difference = 13
+presolve, variable y[17]:
+	impossible deduced bounds: lower = 35, upper = 20;
+	difference = 15
+presolve, variable y[12]:
+	impossible deduced bounds: lower = 35, upper = 22;
+	difference = 13
+presolve, variable y[12]:
+	impossible deduced bounds: lower = 35, upper = 22;
+	difference = 13
+presolve, variable y[23]:
+	impossible deduced bounds: lower = 35, upper = 27;
+	difference = 8
+presolve, variable y[25]:
+	impossible deduced bounds: lower = 35, upper = 29;
+	difference = 6
+presolve, variable y[8]:
+	impossible deduced bounds: lower = 35, upper = 22;
+	difference = 13
+presolve, variable y[23]:
+	impossible deduced bounds: lower = 35, upper = 27;
+	difference = 8
+presolve, variable y[8]:
+	impossible deduced bounds: lower = 35, upper = 22;
+	difference = 13
+presolve, variable y[8]:
+	impossible deduced bounds: lower = 35, upper = 22;
+	difference = 13
+presolve, variable y[23]:
+	impossible deduced bounds: lower = 35, upper = 27;
+	difference = 8
+presolve, variable y[25]:
+	impossible deduced bounds: lower = 35, upper = 29;
+	difference = 6
+presolve, variable y[15]:
+	impossible deduced bounds: lower = 35, upper = 20;
+	difference = 15
+presolve, variable y[23]:
+	impossible deduced bounds: lower = 35, upper = 27;
+	difference = 8
+presolve, variable y[15]:
+	impossible deduced bounds: lower = 35, upper = 20;
+	difference = 15
+presolve, variable y[15]:
+	impossible deduced bounds: lower = 35, upper = 20;
+	difference = 15
+presolve, variable y[16]:
+	impossible deduced bounds: lower = 35, upper = 23;
+	difference = 12
+presolve, variable y[8]:
+	impossible deduced bounds: lower = 35, upper = 22;
+	difference = 13
+presolve: constraint Abaixo[8,16] cannot hold:
+	body <= -13 cannot be >= -3; difference = -10
+presolve, variable y[23]:
+	impossible deduced bounds: lower = 35, upper = 27;
+	difference = 8
+presolve, variable y[23]:
+	impossible deduced bounds: lower = 35, upper = 27;
+	difference = 8
+presolve: constraint Abaixo[12,23] cannot hold:
+	body <= -13 cannot be >= -7; difference = -6
+presolve: constraint Abaixo[12,23] cannot hold:
+	body <= -13 cannot be >= -7; difference = -6

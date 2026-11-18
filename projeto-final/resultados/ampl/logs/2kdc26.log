@@ -1,0 +1,913 @@
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.9999339999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9533929999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9419870000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9318750000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9053819999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8933630000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8830939999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8745650000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8593989999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8496580000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8293800000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8143420000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.788646
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7810279999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.772743
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7578739999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7470109999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7403939999999
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.732837
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6864150000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6774949999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.663904
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6528109999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6428919999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6337950000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.608976
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.5942230000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.5805460000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.5713340000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.5609420000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.5501920000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.5379549999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.5296020000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.5185580000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.4914690000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.4738910000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.4481730000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.4195340000001
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.4037840000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.3591999999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.3524950000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.3427000000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.3319280000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.318718
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.309162
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.2995179999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.2844490000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.264995
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.2385939999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.2101360000001
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.193475
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.1569509999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.1357240000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.123454
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.1091750000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.0946170000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.078129
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.063298
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.0463220000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.9986309999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.9901169999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.9819689999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.9706879999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.957821
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.9436380000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.9181979999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.9055969999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.8918330000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.8794050000001
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3598.8566949999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.8169029999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.7976709999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.7846100000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.7630979999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.7500599999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.733448
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.716852
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3598.7027149999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.6559820000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.6483859999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.6245079999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.6067629999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.5899989999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.5626259999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.549434
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.5331780000001
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3598.5188589999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.4585929999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.4465319999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.4365090000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.4186140000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.4035079999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.388708
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.369115
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.3583760000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.3409449999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.3256179999998
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3598.3103719999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.2555809999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.2452060000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.2236109999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.1957419999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.1776300000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.1513239999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.13681
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.1194529999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.0951340000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.0694990000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.052529
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.0362919999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3598.0213600000002
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3597.9911520000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.9344620000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.9230699999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.9024939999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.8869890000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.863171
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.8354909999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.8209219999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.8036419999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.789319
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3597.7758239999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.715909
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.7081800000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.6992530000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.6865050000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.6614129999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.6380140000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.6173210000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.593437
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.5787829999999
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3597.5672039999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.5062440000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.4870519999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.4742930000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.4628830000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.4537580000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.4224330000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.407224
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.3916690000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.3761279999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.3481999999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.318726
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.2947519999998
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3597.2689230000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.2144589999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.1958049999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.1817380000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.1644889999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.1485189999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.1328870000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.1174299999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3597.0832719999999
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3597.0543080000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.998071
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.9910020000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.9808389999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.9667800000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.9521199999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.9418270000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.924164
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.902842
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.8870820000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.8674700000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.842459
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3596.8188850000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.7582160000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.7376039999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.7287670000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.7189859999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.7075810000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.6854360000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.6704730000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.65265
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.6347649999998
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3596.619553
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.5494039999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.53782
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.5259120000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.4981859999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.4631049999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.4420620000001
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3596.4132599999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.3587349999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.3490590000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.3248189999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.314159
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.2910459999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.2788089999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.2647459999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.2495669999998
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3596.239462
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.1562869999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.148173
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.1392529999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.115065
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3596.1054749999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.0461359999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.0357760000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3596.0154010000001
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3595.9809850000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.9083479999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.898514
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.8680810000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.846591
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.8331819999999
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3595.817239
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.7422329999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.732086
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.7236790000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.7152209999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.7012880000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.6791549999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.6718350000001
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3595.6528699999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.5853080000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.5765670000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.5553060000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.5429720000002
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3595.5221510000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.4655990000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.4574029999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.445976
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.4324809999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.404454
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.3888320000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.3709250000002
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3595.3469960000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.284928
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.264948
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.2401399999999
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3595.229456
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.1508100000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.139639
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.117092
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.0986889999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.0838829999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.0758150000001
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3595.064613
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3595.0056979999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3594.9889020000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3594.9629749999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3594.9550720000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3594.9305479999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3594.9052700000002
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3594.8941209999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3594.8330769999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3594.819129
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3594.8115029999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3594.792645
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3594.7822040000001
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3594.7691589999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3594.6957790000001
+2kdc26: status=otimo caixas=8 LB=8 UB_heur=8 tempo=5.32s iter=28 cortes=82 opp=346 t_opp=3.49s
+CORTE 9 4 20
+CORTE 21 17 5
+CORTE 23 3 13
+CORTE 2 16 14
+CORTE 8 10 25
+CORTE 9 4 7
+CORTE 21 11 1
+CORTE 23 3 17 20
+CORTE 6 15 25
+CORTE 2 14 24
+CORTE 21 24 1
+CORTE 18 16 25
+CORTE 22 14 13
+CORTE 10 4 6 7
+CORTE 12 8 25
+CORTE 10 15 1
+CORTE 23 3 20 1
+CORTE 18 22 25
+CORTE 10 6 13
+CORTE 12 8 1
+CORTE 10 14 13
+CORTE 16 22 25
+CORTE 23 11 7
+CORTE 18 19 25
+CORTE 10 16 1
+CORTE 21 24 17
+CORTE 18 15 25
+CORTE 12 6 13
+CORTE 19 22 14 1
+CORTE 2 16 20
+CORTE 18 22 17 5
+CORTE 12 10 25
+CORTE 19 8 11 1
+CORTE 9 4 5
+CORTE 18 16 17 11
+CORTE 10 6 25
+CORTE 19 15 1
+CORTE 23 3 11 1
+CORTE 18 16 17 5
+CORTE 2 15 14 13
+CORTE 10 22 25
+CORTE 23 3 1 7
+CORTE 19 14 25
+CORTE 8 4 6 11
+CORTE 21 4 11
+CORTE 23 3 24 1
+CORTE 19 8 25
+CORTE 10 22 13
+CORTE 18 10 17
+CORTE 12 22 25
+CORTE 8 16 14 1
+CORTE 22 14 25
+CORTE 19 8 1 7
+CORTE 10 16 13
+CORTE 12 6 25
+CORTE 16 22 13
+CORTE 10 4 14 11
+CORTE 21 4 5 7
+CORTE 23 3 17 11
+CORTE 18 10 25
+CORTE 12 16 13
+CORTE 23 3 24 17
+CORTE 15 14 25
+CORTE 12 16 25
+CORTE 18 6 17 11
+CORTE 12 10 1
+CORTE 19 16 25
+CORTE 18 6 25
+CORTE 12 10 13
+CORTE 2 14 20
+CORTE 12 6 1
+CORTE 19 16 13
+CORTE 8 15 25
+CORTE 21 20 1
+CORTE 18 22 17 11
+CORTE 19 6 25
+CORTE 2 16 5
+CORTE 12 15 25
+CORTE 12 16 24 1
+CORTE 6 22 25
+CORTE 4 6 16 14
+CORTE 6 16 14 17
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+presolve, variable x[11]:
+	impossible deduced bounds: lower = 34, upper = 30;
+	difference = 4
+presolve: constraint Esquerda[19,23] cannot hold:
+	body <= -7 cannot be >= -4; difference = -3
+presolve: constraint Esquerda[19,23] cannot hold:
+	body <= -7 cannot be >= -4; difference = -3
+presolve: constraint Abaixo[18,3] cannot hold:
+	body <= -10 cannot be >= -4; difference = -6
+presolve: constraint Esquerda[16,7] cannot hold:
+	body <= -11 cannot be >= -1; difference = -10
+presolve: constraint Esquerda[9,20] cannot hold:
+	body <= -15 cannot be >= -5; difference = -10
+presolve: constraint Esquerda[24,9] cannot hold:
+	body <= -10 cannot be >= -6; difference = -4
+presolve: constraint Esquerda[9,20] cannot hold:
+	body <= -15 cannot be >= -5; difference = -10
+presolve: constraint Esquerda[1,25] cannot hold:
+	body <= -34 cannot be >= -33; difference = -1
+presolve, variable x[21]:
+	impossible deduced bounds: lower = 30, upper = 23;
+	difference = 7
+presolve: constraint Abaixo[5,19] cannot hold:
+	body <= -20 cannot be >= -9; difference = -11
+presolve: constraint Esquerda[15,20] cannot hold:
+	body <= -16 cannot be >= -8; difference = -8
+presolve: constraint Esquerda[15,20] cannot hold:
+	body <= -16 cannot be >= -8; difference = -8
+presolve: constraint Esquerda[17,7] cannot hold:
+	body <= -9 cannot be >= -3; difference = -6
+presolve, variable x[17]:
+	impossible deduced bounds: lower = 30, upper = 21;
+	difference = 9
+presolve, variable x[17]:
+	impossible deduced bounds: lower = 30, upper = 21;
+	difference = 9
+presolve: constraint Esquerda[13,20] cannot hold:
+	body <= -13 cannot be >= -9; difference = -4
+presolve: constraint Esquerda[13,20] cannot hold:
+	body <= -13 cannot be >= -9; difference = -4
+presolve: constraint Esquerda[14,16] cannot hold:
+	body <= -14 cannot be >= -3; difference = -11
+presolve: constraint Esquerda[14,16] cannot hold:
+	body <= -14 cannot be >= -13; difference = -1
+presolve: constraint Esquerda[9,20] cannot hold:
+	body <= -15 cannot be >= -8; difference = -7
+presolve: constraint Esquerda[9,20] cannot hold:
+	body <= -15 cannot be >= -8; difference = -7
+presolve: constraint Esquerda[24,15] cannot hold:
+	body <= -10 cannot be >= -5; difference = -5
+presolve: constraint Esquerda[24,15] cannot hold:
+	body <= -10 cannot be >= -5; difference = -5
+presolve: constraint Esquerda[24,15] cannot hold:
+	body <= -10 cannot be >= -5; difference = -5
+presolve: constraint Esquerda[10,24] cannot hold:
+	body <= -19 cannot be >= -14; difference = -5
+presolve: constraint Abaixo[5,24] cannot hold:
+	body <= -20 cannot be >= -8; difference = -12
+presolve: constraint Esquerda[14,20] cannot hold:
+	body <= -14 cannot be >= -9; difference = -5
+presolve: constraint Esquerda[14,20] cannot hold:
+	body <= -14 cannot be >= -9; difference = -5
+presolve: constraint Esquerda[14,20] cannot hold:
+	body <= -14 cannot be >= -9; difference = -5
+presolve: constraint Esquerda[12,18] cannot hold:
+	body <= -16 cannot be >= -5; difference = -11
+presolve: constraint Esquerda[12,18] cannot hold:
+	body <= -16 cannot be >= -5; difference = -11
+presolve: constraint Esquerda[6,24] cannot hold:
+	body <= -16 cannot be >= -15; difference = -1
+presolve: constraint Esquerda[6,24] cannot hold:
+	body <= -16 cannot be >= -15; difference = -1
+presolve: constraint Esquerda[16,18] cannot hold:
+	body <= -11 cannot be >= -5; difference = -6
+presolve: constraint Esquerda[10,22] cannot hold:
+	body <= -19 cannot be >= -18; difference = -1
+presolve: constraint Esquerda[16,18] cannot hold:
+	body <= -11 cannot be >= -5; difference = -6
+presolve: constraint Esquerda[10,22] cannot hold:
+	body <= -19 cannot be >= -18; difference = -1
+presolve: constraint Esquerda[16,18] cannot hold:
+	body <= -11 cannot be >= -5; difference = -6
+presolve: constraint Esquerda[14,20] cannot hold:
+	body <= -14 cannot be >= -11; difference = -3
+presolve: constraint Esquerda[23,7] cannot hold:
+	body <= -6 cannot be >= -1; difference = -5
+presolve: constraint Esquerda[14,20] cannot hold:
+	body <= -14 cannot be >= -11; difference = -3
+presolve: constraint Esquerda[14,20] cannot hold:
+	body <= -14 cannot be >= -11; difference = -3
+presolve: constraint Esquerda[3,25] cannot hold:
+	body <= -31 cannot be >= -30; difference = -1
+presolve: constraint Abaixo[5,19] cannot hold:
+	body <= -20 cannot be >= -9; difference = -11
+presolve: constraint Esquerda[3,25] cannot hold:
+	body <= -31 cannot be >= -30; difference = -1
+presolve: constraint Esquerda[3,25] cannot hold:
+	body <= -31 cannot be >= -30; difference = -1
+presolve: constraint Esquerda[8,20] cannot hold:
+	body <= -15 cannot be >= -9; difference = -6
+presolve: constraint Esquerda[13,18] cannot hold:
+	body <= -13 cannot be >= -5; difference = -8
+presolve: constraint Esquerda[24,13] cannot hold:
+	body <= -10 cannot be >= -8; difference = -2
+presolve: constraint Esquerda[13,18] cannot hold:
+	body <= -13 cannot be >= -5; difference = -8
+presolve: constraint Esquerda[24,13] cannot hold:
+	body <= -10 cannot be >= -8; difference = -2
+presolve: constraint Esquerda[10,24] cannot hold:
+	body <= -19 cannot be >= -17; difference = -2
+presolve: constraint Esquerda[17,19] cannot hold:
+	body <= -9 cannot be >= -3; difference = -6
+presolve: constraint Esquerda[15,20] cannot hold:
+	body <= -16 cannot be >= -9; difference = -7
+presolve: constraint Esquerda[15,20] cannot hold:
+	body <= -16 cannot be >= -9; difference = -7
+presolve: constraint Esquerda[6,18] cannot hold:
+	body <= -16 cannot be >= -8; difference = -8
+presolve: constraint Esquerda[6,18] cannot hold:
+	body <= -16 cannot be >= -8; difference = -8
+presolve: constraint Esquerda[22,7] cannot hold:
+	body <= -6 cannot be >= -1; difference = -5
+presolve: constraint Esquerda[6,20] cannot hold:
+	body <= -16 cannot be >= -5; difference = -11
+presolve, variable x[11]:
+	impossible deduced bounds: lower = 34, upper = 30;
+	difference = 4
+presolve: constraint Esquerda[12,20] cannot hold:
+	body <= -16 cannot be >= -5; difference = -11
+presolve: constraint Esquerda[24,15] cannot hold:
+	body <= -10 cannot be >= -9; difference = -1
+presolve: constraint Esquerda[8,24] cannot hold:
+	body <= -15 cannot be >= -14; difference = -1
+presolve: constraint Abaixo[5,24] cannot hold:
+	body <= -20 cannot be >= -8; difference = -12
+presolve: constraint Esquerda[15,16] cannot hold:
+	body <= -16 cannot be >= -3; difference = -13
+presolve: constraint Esquerda[14,20] cannot hold:
+	body <= -14 cannot be >= -5; difference = -9
+presolve: constraint Esquerda[10,22] cannot hold:
+	body <= -19 cannot be >= -18; difference = -1
+presolve: constraint Esquerda[14,20] cannot hold:
+	body <= -14 cannot be >= -5; difference = -9
+presolve: constraint Esquerda[5,25] cannot hold:
+	body <= -29 cannot be >= -6; difference = -23
+presolve: constraint Esquerda[19,24] cannot hold:
+	body <= -7 cannot be >= -1; difference = -6
+presolve: constraint Esquerda[5,25] cannot hold:
+	body <= -29 cannot be >= -6; difference = -23
+presolve: constraint Esquerda[8,16] cannot hold:
+	body <= -15 cannot be >= -13; difference = -2
+presolve: constraint Esquerda[8,16] cannot hold:
+	body <= -15 cannot be >= -13; difference = -2
+presolve: constraint Esquerda[2,11] cannot hold:
+	body <= -30 cannot be >= -29; difference = -1
+presolve: constraint Esquerda[2,11] cannot hold:
+	body <= -30 cannot be >= -29; difference = -1
+presolve: constraint Abaixo[5,24] cannot hold:
+	body <= -20 cannot be >= -8; difference = -12
+presolve: constraint Esquerda[9,20] cannot hold:
+	body <= -15 cannot be >= -9; difference = -6
+presolve: constraint Esquerda[14,18] cannot hold:
+	body <= -14 cannot be >= -5; difference = -9
+presolve: constraint Esquerda[19,4] cannot hold:
+	body <= -7 cannot be >= -6; difference = -1
+presolve: constraint Esquerda[14,20] cannot hold:
+	body <= -14 cannot be >= -8; difference = -6
+presolve: constraint Esquerda[14,16] cannot hold:
+	body <= -14 cannot be >= -3; difference = -11
+presolve: constraint Esquerda[14,16] cannot hold:
+	body <= -14 cannot be >= -13; difference = -1
+presolve: constraint Esquerda[13,18] cannot hold:
+	body <= -13 cannot be >= -5; difference = -8
+presolve: constraint Esquerda[10,21] cannot hold:
+	body <= -19 cannot be >= -17; difference = -2
+presolve: constraint Esquerda[13,18] cannot hold:
+	body <= -13 cannot be >= -5; difference = -8
+presolve: constraint Esquerda[10,21] cannot hold:
+	body <= -19 cannot be >= -17; difference = -2
+presolve: constraint Esquerda[13,18] cannot hold:
+	body <= -13 cannot be >= -5; difference = -8
+presolve: constraint Esquerda[6,20] cannot hold:
+	body <= -16 cannot be >= -8; difference = -8
+presolve: constraint Esquerda[24,6] cannot hold:
+	body <= -10 cannot be >= -8; difference = -2
+presolve: constraint Esquerda[6,20] cannot hold:
+	body <= -16 cannot be >= -8; difference = -8
+presolve: constraint Esquerda[14,18] cannot hold:
+	body <= -14 cannot be >= -11; difference = -3
+presolve: constraint Esquerda[14,18] cannot hold:
+	body <= -14 cannot be >= -11; difference = -3
+presolve: constraint Abaixo[5,19] cannot hold:
+	body <= -20 cannot be >= -9; difference = -11
+presolve: constraint Esquerda[4,20] cannot hold:
+	body <= -15 cannot be >= -5; difference = -10
+presolve: constraint Esquerda[13,18] cannot hold:
+	body <= -13 cannot be >= -8; difference = -5
+presolve: constraint Esquerda[6,17] cannot hold:
+	body <= -16 cannot be >= -15; difference = -1
+presolve: constraint Esquerda[13,18] cannot hold:
+	body <= -13 cannot be >= -8; difference = -5
+presolve: constraint Abaixo[5,19] cannot hold:
+	body <= -20 cannot be >= -9; difference = -11
+presolve: constraint Esquerda[15,16] cannot hold:
+	body <= -16 cannot be >= -13; difference = -3
+presolve: constraint Esquerda[15,16] cannot hold:
+	body <= -16 cannot be >= -13; difference = -3
+presolve: constraint Esquerda[15,16] cannot hold:
+	body <= -16 cannot be >= -13; difference = -3
+presolve: constraint Esquerda[15,16] cannot hold:
+	body <= -16 cannot be >= -13; difference = -3
+presolve: constraint Esquerda[13,20] cannot hold:
+	body <= -13 cannot be >= -8; difference = -5
+presolve: constraint Esquerda[13,20] cannot hold:
+	body <= -13 cannot be >= -8; difference = -5
+presolve: constraint Esquerda[6,18] cannot hold:
+	body <= -16 cannot be >= -5; difference = -11
+presolve: constraint Esquerda[24,6] cannot hold:
+	body <= -10 cannot be >= -5; difference = -5
+presolve: constraint Esquerda[24,6] cannot hold:
+	body <= -10 cannot be >= -5; difference = -5
+presolve: constraint Esquerda[13,20] cannot hold:
+	body <= -13 cannot be >= -9; difference = -4
+presolve: constraint Esquerda[13,20] cannot hold:
+	body <= -13 cannot be >= -9; difference = -4
+presolve: constraint Esquerda[4,20] cannot hold:
+	body <= -15 cannot be >= -8; difference = -7
+presolve: constraint Esquerda[4,20] cannot hold:
+	body <= -15 cannot be >= -8; difference = -7
+presolve: constraint Esquerda[6,18] cannot hold:
+	body <= -16 cannot be >= -5; difference = -11
+presolve: constraint Esquerda[6,18] cannot hold:
+	body <= -16 cannot be >= -5; difference = -11
+presolve: constraint Esquerda[22,7] cannot hold:
+	body <= -6 cannot be >= -3; difference = -3
+presolve: constraint Esquerda[24,6] cannot hold:
+	body <= -10 cannot be >= -8; difference = -2
+presolve: constraint Esquerda[24,6] cannot hold:
+	body <= -10 cannot be >= -8; difference = -2
+presolve: constraint Esquerda[13,18] cannot hold:
+	body <= -13 cannot be >= -9; difference = -4
+presolve: constraint Esquerda[13,18] cannot hold:
+	body <= -13 cannot be >= -9; difference = -4
+presolve: constraint Esquerda[15,20] cannot hold:
+	body <= -16 cannot be >= -9; difference = -7
+presolve, variable x[25]:
+	impossible deduced bounds: lower = 30, upper = 27;
+	difference = 3
+presolve, variable x[22]:
+	impossible deduced bounds: lower = 30, upper = 24;
+	difference = 6
+presolve, variable x[22]:
+	impossible deduced bounds: lower = 30, upper = 24;
+	difference = 6
+presolve: constraint Esquerda[8,18] cannot hold:
+	body <= -15 cannot be >= -8; difference = -7
+presolve: constraint Esquerda[8,20] cannot hold:
+	body <= -15 cannot be >= -8; difference = -7
+presolve: constraint Esquerda[8,20] cannot hold:
+	body <= -15 cannot be >= -8; difference = -7
+presolve: constraint Esquerda[23,7] cannot hold:
+	body <= -6 cannot be >= -1; difference = -5
+presolve: constraint Esquerda[23,7] cannot hold:
+	body <= -6 cannot be >= -1; difference = -5
+presolve: constraint Esquerda[15,20] cannot hold:
+	body <= -16 cannot be >= -8; difference = -8
+presolve: constraint Esquerda[15,20] cannot hold:
+	body <= -16 cannot be >= -8; difference = -8
+presolve: constraint Esquerda[15,20] cannot hold:
+	body <= -16 cannot be >= -8; difference = -8
+presolve: constraint Esquerda[14,18] cannot hold:
+	body <= -14 cannot be >= -8; difference = -6
+presolve: constraint Esquerda[14,20] cannot hold:
+	body <= -14 cannot be >= -8; difference = -6
+presolve: constraint Esquerda[14,18] cannot hold:
+	body <= -14 cannot be >= -8; difference = -6
+presolve: constraint Esquerda[14,20] cannot hold:
+	body <= -14 cannot be >= -8; difference = -6
+presolve: constraint Esquerda[14,20] cannot hold:
+	body <= -14 cannot be >= -8; difference = -6

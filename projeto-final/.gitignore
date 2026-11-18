@@ -1,0 +1,29 @@
+# Ambiente Python (recriar com os comandos do README)
+.venv/
+__pycache__/
+*.pyc
+
+# Temporários do LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# Binários compilados (recriar com `make` em meta/)
+meta/rko_bppc
+*.o
+meta/RKO_Cpp_v2.0/Program/runRKO
+
+# Saídas de testes locais
+meta/*.sol
+resultados/minha_execucao/
+*.png.tmp
+
+# Artigo-base: direitos dos autores (dos Santos et al., 2024), não redistribuir
+Problema-Empacotamento-Bidimensional.pdf
+
+# Logs do AMPL são úteis (auditoria dos cortes): manter resultados/ampl/logs/*.log
+!resultados/ampl/logs/*.log

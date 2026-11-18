@@ -1,0 +1,20 @@
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.9999349999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8579960000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.842756
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.833005
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6782400000002
+2kdc03: status=otimo caixas=20 LB=20 UB_heur=20 tempo=0.33s iter=2 cortes=1 opp=8 t_opp=0.03s
+CORTE 18 20 13
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+presolve, constraint Separa[18,22]:
+	all variables eliminated, but lower bound = 1 > 0

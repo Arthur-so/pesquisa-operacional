@@ -1,0 +1,63 @@
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.999867
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9808779999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.958889
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.938251
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9210870000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9131560000001
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.8901620000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8604319999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8498709999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.833024
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.8086050000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7936340000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7723729999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7577249999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7344189999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.712051
+2kdc60: status=otimo caixas=5 LB=5 UB_heur=5 tempo=0.31s iter=3 cortes=2 opp=19 t_opp=0.24s
+CORTE 7 6 8
+CORTE 7 8 5
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+presolve, variable x[5]:
+	impossible deduced bounds: lower = 38, upper = 20;
+	difference = 18
+presolve, variable x[5]:
+	impossible deduced bounds: lower = 38, upper = 20;
+	difference = 18
+presolve, variable x[8]:
+	impossible deduced bounds: lower = 38, upper = 23;
+	difference = 15
+presolve, variable x[8]:
+	impossible deduced bounds: lower = 38, upper = 23;
+	difference = 15
+presolve, variable x[8]:
+	impossible deduced bounds: lower = 38, upper = 23;
+	difference = 15

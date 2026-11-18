@@ -1,0 +1,182 @@
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.9999349999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9686139999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9480720000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9383539999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9252099999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9132060000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8995770000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.888786
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8747079999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8514489999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8250309999999
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.8117860000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7785330000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7660850000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.740405
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7250749999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7100380000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6984130000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.690732
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.670302
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6517869999998
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.6415670000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.6158350000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.5955300000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.5817889999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.572662
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.5515909999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.527673
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.520982
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.4997680000001
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.472976
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.4401210000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.4250619999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.417289
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.4092070000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.385342
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.3718589999999
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.3574119999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.330555
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.3188639999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.3064250000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.2994159999998
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.2795489999999
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.2627579999998
+2kdc30: status=otimo caixas=8 LB=8 UB_heur=8 tempo=0.75s iter=5 cortes=5 opp=55 t_opp=0.57s
+CORTE 3 12 20
+CORTE 7 11 19
+CORTE 7 19 6
+CORTE 7 17 6
+CORTE 7 11 6
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+presolve, variable x[23]:
+	impossible deduced bounds: lower = 38, upper = 37;
+	difference = 1
+presolve, variable x[23]:
+	impossible deduced bounds: lower = 38, upper = 37;
+	difference = 1
+presolve, variable x[23]:
+	impossible deduced bounds: lower = 38, upper = 37;
+	difference = 1
+presolve, variable x[20]:
+	impossible deduced bounds: lower = 34, upper = 30;
+	difference = 4
+presolve, variable x[25]:
+	impossible deduced bounds: lower = 34, upper = 32;
+	difference = 2
+presolve, variable x[17]:
+	impossible deduced bounds: lower = 34, upper = 31;
+	difference = 3
+presolve, variable x[12]:
+	impossible deduced bounds: lower = 34, upper = 30;
+	difference = 4
+presolve, variable x[20]:
+	impossible deduced bounds: lower = 34, upper = 30;
+	difference = 4
+presolve, variable x[17]:
+	impossible deduced bounds: lower = 34, upper = 31;
+	difference = 3
+presolve, variable x[12]:
+	impossible deduced bounds: lower = 34, upper = 30;
+	difference = 4
+presolve, variable x[20]:
+	impossible deduced bounds: lower = 34, upper = 30;
+	difference = 4
+presolve, variable x[12]:
+	impossible deduced bounds: lower = 34, upper = 30;
+	difference = 4
+presolve, variable x[12]:
+	impossible deduced bounds: lower = 34, upper = 30;
+	difference = 4
+presolve, variable x[20]:
+	impossible deduced bounds: lower = 34, upper = 30;
+	difference = 4
+presolve, variable x[25]:
+	impossible deduced bounds: lower = 34, upper = 32;
+	difference = 2
+presolve, variable x[17]:
+	impossible deduced bounds: lower = 34, upper = 31;
+	difference = 3
+presolve, variable x[20]:
+	impossible deduced bounds: lower = 34, upper = 30;
+	difference = 4
+presolve, variable x[17]:
+	impossible deduced bounds: lower = 34, upper = 31;
+	difference = 3
+presolve, variable x[20]:
+	impossible deduced bounds: lower = 34, upper = 30;
+	difference = 4
+presolve: constraint Esquerda[3,17] cannot hold:
+	body <= -34 cannot be >= -33; difference = -1
+presolve: constraint Esquerda[3,17] cannot hold:
+	body <= -34 cannot be >= -33; difference = -1
+presolve: constraint Esquerda[12,20] cannot hold:
+	body <= -4 cannot be >= -2; difference = -2
+presolve: constraint Esquerda[12,20] cannot hold:
+	body <= -4 cannot be >= -2; difference = -2
+presolve: constraint Esquerda[12,20] cannot hold:
+	body <= -4 cannot be >= -2; difference = -2

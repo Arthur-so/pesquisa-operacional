@@ -1,0 +1,51 @@
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.9998850000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9848630000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.96252
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.9342550000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.900674
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8744790000001
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.862259
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8539169999999
+HiGHS 1.15.1:   tech:outlev = 0
+  mip:bestbound = 1
+  lim:time = 3599.8344040000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.8137270000002
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 3599.7825290000001
+2kdc24: status=otimo caixas=5 LB=5 UB_heur=5 tempo=0.25s iter=2 cortes=1 opp=14 t_opp=0.21s
+CORTE 19 15 23
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+HiGHS 1.15.1:   tech:outlev = 0
+  lim:time = 600
+presolve, variable x[12]:
+	impossible deduced bounds: lower = 33, upper = 30;
+	difference = 3
+presolve, variable x[12]:
+	impossible deduced bounds: lower = 33, upper = 30;
+	difference = 3
+presolve, variable x[12]:
+	impossible deduced bounds: lower = 33, upper = 30;
+	difference = 3
+presolve, variable x[12]:
+	impossible deduced bounds: lower = 33, upper = 30;
+	difference = 3
+presolve, variable x[12]:
+	impossible deduced bounds: lower = 33, upper = 30;
+	difference = 3
